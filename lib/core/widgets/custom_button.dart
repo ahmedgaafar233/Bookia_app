@@ -14,6 +14,7 @@ class CustomButton extends StatelessWidget {
     this.height,
     this.radius,
     this.borderColor,
+    this.prefixIcon,
   });
 
   final String text;

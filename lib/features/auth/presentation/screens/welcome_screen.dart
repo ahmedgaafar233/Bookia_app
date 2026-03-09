@@ -4,6 +4,7 @@ import 'package:bookia/core/widgets/custom_button.dart';
 import 'package:bookia/features/auth/presentation/screens/login_screen.dart';
 import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class WelcomeScreen extends StatelessWidget {
