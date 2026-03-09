@@ -8,6 +8,7 @@ import 'package:bookia/features/auth/presentation/screens/create_new_password_sc
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class OTPVerificationScreen extends StatefulWidget {
 }
 
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
-  final List<TextEditingController> _controllers = List.generate(4, (_) => TextEditingController());
+  final List<TextEditingController> _controllers = List.generate(6, (_) => TextEditingController());
 
   @override
   Widget build(BuildContext context) {
@@ -44,36 +45,52 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Image.asset(AppAssets.backArrow, width: 41),
+              automaticallyImplyLeading: false,
+              title: Padding(
+                padding: EdgeInsets.only(left: 10.w),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 41.w,
+                      height: 41.h,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.borderColor),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(Icons.arrow_back_ios_new, size: 15.sp),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
+              padding: EdgeInsets.symmetric(horizontal: 22.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Gap(30),
-                  const Text(
+                   Gap(30.h),
+                   Text(
                     'OTP Verification',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 30.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.secondaryColor,
                     ),
                   ),
-                  const Gap(10),
-                  const Text(
+                   Gap(10.h),
+                   Text(
                     "Enter the verification code we just sent on your email address.",
-                    style: TextStyle(color: AppColors.darkGrey, fontSize: 16),
+                    style: TextStyle(color: AppColors.darkGrey, fontSize: 16.sp),
                   ),
-                  const Gap(32),
+                   Gap(32.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(4, (index) => _otpBox(_controllers[index])),
+                    children: List.generate(6, (index) => _otpBox(_controllers[index])),
                   ),
-                  const Gap(35),
+                   Gap(35.h),
                   state is AuthLoading
                       ? const Center(child: CircularProgressIndicator())
                       : CustomButton(
@@ -87,22 +104,23 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Didn't receive code? "),
+                       Text("Didn't receive code? ", style: TextStyle(fontSize: 15.sp)),
                       GestureDetector(
                         onTap: () {
                           context.read<AuthCubit>().forgetPassword(widget.email);
                         },
-                        child: const Text(
+                        child:  Text(
                           'Resend',
                           style: TextStyle(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold,
+                            fontSize: 15.sp,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const Gap(20),
+                   Gap(20.h),
                 ],
               ),
             ),
@@ -114,17 +132,17 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   Widget _otpBox(TextEditingController controller) {
     return Container(
-      width: 70,
-      height: 60,
+      width: 48.w,
+      height: 60.h,
       decoration: BoxDecoration(
-        color: AppColors.textFieldBackground,
+        color: AppColors.white,
         border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.r),
       ),
       child: TextField(
         controller: controller,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
         keyboardType: TextInputType.number,
         maxLength: 1,
         onChanged: (value) {
@@ -133,6 +151,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
           }
         },
         decoration: const InputDecoration(
+          filled: false,
           counterText: '',
           border: InputBorder.none,
           enabledBorder: InputBorder.none,

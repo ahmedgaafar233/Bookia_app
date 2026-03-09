@@ -9,6 +9,7 @@ import 'package:bookia/features/auth/presentation/screens/login_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -48,47 +49,100 @@ class _RegisterScreenState extends State<RegisterScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Image.asset(AppAssets.backArrow, width: 41),
+              automaticallyImplyLeading: false,
+              title: Padding(
+                padding: EdgeInsets.only(left: 10.w),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 41.w,
+                      height: 41.h,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.borderColor),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(Icons.arrow_back_ios_new, size: 15.sp),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             body: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
+              padding: EdgeInsets.symmetric(horizontal: 22.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Gap(30),
-                  const Text(
+                   Gap(30.h),
+                   Text(
                     'Hello! Register to get started',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 30.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.secondaryColor,
                     ),
                   ),
-                  const Gap(32),
-                  CustomTextField(hintText: 'Username', controller: _nameController),
-                  const Gap(12),
-                  CustomTextField(hintText: 'Email', controller: _emailController),
-                  const Gap(12),
-                  CustomTextField(
-                    hintText: 'Password',
-                    obscureText: true,
-                    controller: _passwordController,
+                   Gap(32.h),
+                  SizedBox(
+                    width: 331.w,
+                    height: 56.h,
+                    child: CustomTextField(hintText: 'Username', controller: _nameController),
                   ),
-                  const Gap(12),
-                  CustomTextField(
-                    hintText: 'Confirm password',
-                    obscureText: true,
-                    controller: _confirmPasswordController,
+                   Gap(12.h),
+                  SizedBox(
+                    width: 331.w,
+                    height: 56.h,
+                    child: CustomTextField(hintText: 'Email', controller: _emailController),
                   ),
-                  const Gap(30),
+                   Gap(12.h),
+                  SizedBox(
+                    width: 331.w,
+                    height: 56.h,
+                    child: CustomTextField(
+                      hintText: 'Password',
+                      obscureText: true,
+                      controller: _passwordController,
+                    ),
+                  ),
+                   Gap(12.h),
+                  SizedBox(
+                    width: 331.w,
+                    height: 56.h,
+                    child: CustomTextField(
+                      hintText: 'Confirm password',
+                      obscureText: true,
+                      controller: _confirmPasswordController,
+                    ),
+                  ),
+                   Gap(30.h),
                   state is AuthLoading
                       ? const Center(child: CircularProgressIndicator())
                       : CustomButton(
                           text: 'Register',
                           onPressed: () {
+                            if (_nameController.text.isEmpty ||
+                                _emailController.text.isEmpty ||
+                                _passwordController.text.isEmpty ||
+                                _confirmPasswordController.text.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Please fill all fields')),
+                              );
+                              return;
+                            }
+                            if (_passwordController.text.length < 8) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Password must be at least 8 characters')),
+                              );
+                              return;
+                            }
+                            if (_passwordController.text != _confirmPasswordController.text) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Passwords do not match')),
+                              );
+                              return;
+                            }
                             context.read<AuthCubit>().register(
                                   name: _nameController.text,
                                   email: _emailController.text,
@@ -97,35 +151,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 );
                           },
                         ),
-                  const Gap(50),
-// ...
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Already have an account? "),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const LoginScreen()),
-                    );
-                  },
-                  child: const Text(
-                    'Login Now',
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                   Gap(50.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                       Text("Already have an account? ", style: TextStyle(fontSize: 15.sp)),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const LoginScreen()),
+                          );
+                        },
+                        child:  Text(
+                          'Login Now',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15.sp,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                   Gap(20.h),
+                ],
+              ),
             ),
-            const Gap(20),
-          ],
-        ),
-      ),
-    );
-  },
+          );
+        },
 ),
 );
   }

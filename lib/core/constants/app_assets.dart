@@ -1,6 +1,7 @@
 class AppAssets {
   static const String logo = 'assets/images/logo.png';
   static const String welcomeBg = 'assets/images/welcome_bg.png';
+  static const String welcomeBgNew = 'assets/images/alif_caesar_rizqi_pratama_loulsoxl81c_unsplash_1.png';
   static const String backArrow = 'assets/icons/back_arrow.png';
   static const String googleIcon = 'assets/icons/google.svg';
   static const String appleIcon = 'assets/icons/apple.svg';
@@ -13,6 +14,7 @@ class AppAssets {
   static const String otpVerificationPng = 'assets/images/otp_verification.png';
   static const String createNewPasswordPng = 'assets/images/create_new_password.png';
   static const String passwordChangedPng = 'assets/images/password_changed.png';
+  static const String successMark = 'assets/images/successmark.png';
 
   // SVGs
   static const String backSvg = 'assets/icons/back.svg';

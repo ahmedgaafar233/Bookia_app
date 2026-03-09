@@ -9,6 +9,7 @@ import 'package:bookia/features/auth/presentation/screens/password_changed_scree
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class CreateNewPasswordScreen extends StatefulWidget {
@@ -43,43 +44,67 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Image.asset(AppAssets.backArrow, width: 41),
+              automaticallyImplyLeading: false,
+              title: Padding(
+                padding: EdgeInsets.only(left: 10.w),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 41.w,
+                      height: 41.h,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.borderColor),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(Icons.arrow_back_ios_new, size: 15.sp),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
+              padding: EdgeInsets.symmetric(horizontal: 22.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Gap(30),
-                  const Text(
+                   Gap(30.h),
+                   Text(
                     'Create new password',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 30.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.secondaryColor,
                     ),
                   ),
-                  const Gap(10),
-                  const Text(
+                   Gap(10.h),
+                   Text(
                     "Your new password must be unique from those previously used.",
-                    style: TextStyle(color: AppColors.darkGrey, fontSize: 16),
+                    style: TextStyle(color: AppColors.darkGrey, fontSize: 16.sp),
                   ),
-                  const Gap(32),
-                  CustomTextField(
-                    hintText: 'New Password',
-                    obscureText: true,
-                    controller: _passwordController,
+                   Gap(32.h),
+                  SizedBox(
+                    width: 331.w,
+                    height: 56.h,
+                    child: CustomTextField(
+                      hintText: 'New Password',
+                      obscureText: true,
+                      controller: _passwordController,
+                    ),
                   ),
-                  const Gap(12),
-                  CustomTextField(
-                    hintText: 'Confirm Password',
-                    obscureText: true,
-                    controller: _confirmPasswordController,
+                   Gap(12.h),
+                  SizedBox(
+                    width: 331.w,
+                    height: 56.h,
+                    child: CustomTextField(
+                      hintText: 'Confirm Password',
+                      obscureText: true,
+                      controller: _confirmPasswordController,
+                    ),
                   ),
-                  const Gap(35),
+                   Gap(35.h),
                   state is AuthLoading
                       ? const Center(child: CircularProgressIndicator())
                       : CustomButton(

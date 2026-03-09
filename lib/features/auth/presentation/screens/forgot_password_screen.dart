@@ -9,6 +9,7 @@ import 'package:bookia/features/auth/presentation/screens/otp_verification_scree
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -43,36 +44,56 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Image.asset(AppAssets.backArrow, width: 41),
+              automaticallyImplyLeading: false,
+              title: Padding(
+                padding: EdgeInsets.only(left: 10.w),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 41.w,
+                      height: 41.h,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.borderColor),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(Icons.arrow_back_ios_new, size: 15.sp),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
+              padding: EdgeInsets.symmetric(horizontal: 22.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Gap(30),
-                  const Text(
+                   Gap(30.h),
+                   Text(
                     'Forgot Password?',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 30.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.secondaryColor,
                     ),
                   ),
-                  const Gap(10),
-                  const Text(
+                   Gap(10.h),
+                   Text(
                     "Don't worry! It occurs. Please enter the email address linked with your account.",
-                    style: TextStyle(color: AppColors.darkGrey, fontSize: 16),
+                    style: TextStyle(color: AppColors.darkGrey, fontSize: 16.sp),
                   ),
-                  const Gap(32),
-                  CustomTextField(
-                    hintText: 'Enter your email',
-                    controller: _emailController,
+                   Gap(32.h),
+                  SizedBox(
+                    width: 331.w,
+                    height: 56.h,
+                    child: CustomTextField(
+                      hintText: 'Enter your email',
+                      controller: _emailController,
+                    ),
                   ),
-                  const Gap(35),
+                   Gap(35.h),
                   state is AuthLoading
                       ? const Center(child: CircularProgressIndicator())
                       : CustomButton(
@@ -85,20 +106,21 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Remember Password? "),
+                       Text("Remember Password? ", style: TextStyle(fontSize: 15.sp)),
                       GestureDetector(
                         onTap: () => Navigator.pop(context),
-                        child: const Text(
+                        child:  Text(
                           'Login',
                           style: TextStyle(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold,
+                            fontSize: 15.sp,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const Gap(20),
+                   Gap(20.h),
                 ],
               ),
             ),

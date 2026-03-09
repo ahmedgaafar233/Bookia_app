@@ -1,5 +1,7 @@
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -22,32 +24,42 @@ class CustomButton extends StatelessWidget {
   final double? height;
   final double? radius;
   final Color? borderColor;
+  final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? double.infinity,
-      height: height ?? 56,
+      height: height ?? 56.h,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: color ?? AppColors.primaryColor,
           foregroundColor: textColor ?? AppColors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius ?? 8),
+            borderRadius: BorderRadius.circular(radius ?? 8.r),
             side: borderColor != null
                 ? BorderSide(color: borderColor!)
                 : BorderSide.none,
           ),
           elevation: 0,
         ),
-        child: Text(
-          text,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: textColor ?? AppColors.white,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (prefixIcon != null) ...[
+              prefixIcon!,
+              Gap(10.w),
+            ],
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w600,
+                color: textColor ?? AppColors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );

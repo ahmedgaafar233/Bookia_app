@@ -11,6 +11,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -45,48 +46,72 @@ class _LoginScreenState extends State<LoginScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Image.asset(AppAssets.backArrow, width: 41),
+              automaticallyImplyLeading: false,
+              title: Padding(
+                padding: EdgeInsets.only(left: 10.w),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 41.w,
+                      height: 41.h,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.borderColor),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: Icon(Icons.arrow_back_ios_new, size: 15.sp),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             body: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
+              padding: EdgeInsets.symmetric(horizontal: 22.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Gap(30),
-                  const Text(
+                   Gap(30.h),
+                   Text(
                     'Welcome back! Glad to see you, Again!',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 30.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.secondaryColor,
                     ),
                   ),
-                  const Gap(32),
-                  CustomTextField(
-                    hintText: 'Enter your email',
-                    controller: _emailController,
+                   Gap(32.h),
+                  SizedBox(
+                    width: 331.w,
+                    height: 56.h,
+                    child: CustomTextField(
+                      hintText: 'Enter your email',
+                      controller: _emailController,
+                    ),
                   ),
-                  const Gap(15),
-                  CustomTextField(
-                    hintText: 'Enter your password',
-                    controller: _passwordController,
-                    obscureText: !_isPasswordVisible,
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                      icon: Icon(
-                        _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                        color: AppColors.darkGrey,
+                   Gap(15.h),
+                  SizedBox(
+                    width: 331.w,
+                    height: 56.h,
+                    child: CustomTextField(
+                      hintText: 'Enter your password',
+                      controller: _passwordController,
+                      obscureText: !_isPasswordVisible,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
+                        },
+                        icon: Icon(
+                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          color: AppColors.darkGrey,
+                        ),
                       ),
                     ),
                   ),
-                  const Gap(12),
+                   Gap(12.h),
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -96,13 +121,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           MaterialPageRoute(builder: (context) => const ForgotPasswordScreen()),
                         );
                       },
-                      child: const Text(
+                      child:  Text(
                         'Forgot Password?',
-                        style: TextStyle(color: AppColors.darkGrey),
+                        style: TextStyle(color: AppColors.darkGrey, fontSize: 14.sp),
                       ),
                     ),
                   ),
-                  const Gap(30),
+                   Gap(30.h),
                   state is AuthLoading
                       ? const Center(child: CircularProgressIndicator())
                       : CustomButton(
@@ -114,55 +139,83 @@ class _LoginScreenState extends State<LoginScreen> {
                                 );
                           },
                         ),
-                  const Gap(35),
-                  // ... remaining children
-            Row(
-              children: [
-                Expanded(child: Divider(color: AppColors.borderColor)),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text('Or Login with', style: TextStyle(color: AppColors.darkGrey)),
-                ),
-                Expanded(child: Divider(color: AppColors.borderColor)),
-              ],
-            ),
-            const Gap(22),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                 _socialButton(AppAssets.googleIcon),
-                 _socialButton(AppAssets.appleIcon),
-                 _socialButton(AppAssets.facebookIcon),
-              ],
-            ),
-            const Gap(50),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Don't have an account? "),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const RegisterScreen()),
-                    );
-                  },
-                  child: const Text(
-                    'Register Now',
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                   Gap(35.h),
+                  Row(
+                    children: [
+                       Expanded(child: Divider(color: AppColors.borderColor, thickness: 1)),
+                       Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: Text('Or Login with', style: TextStyle(color: AppColors.darkGrey, fontSize: 14.sp)),
+                      ),
+                       Expanded(child: Divider(color: AppColors.borderColor, thickness: 1)),
+                    ],
                   ),
-                ),
-              ],
+                   Gap(22.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomButton(
+                          text: 'Google',
+                          onPressed: () {},
+                          color: AppColors.white,
+                          textColor: AppColors.secondaryColor,
+                          borderColor: AppColors.borderColor,
+                          prefixIcon: SvgPicture.asset(AppAssets.googleIc, width: 24.w),
+                        ),
+                      ),
+                       Gap(8.w),
+                      Expanded(
+                        child: CustomButton(
+                          text: 'Apple',
+                          onPressed: () {},
+                          color: AppColors.white,
+                          textColor: AppColors.secondaryColor,
+                          borderColor: AppColors.borderColor,
+                          prefixIcon: SvgPicture.asset(AppAssets.appleIc, width: 24.w),
+                        ),
+                      ),
+                       Gap(8.w),
+                      Expanded(
+                        child: CustomButton(
+                          text: 'Facebook',
+                          onPressed: () {},
+                          color: AppColors.white,
+                          textColor: AppColors.secondaryColor,
+                          borderColor: AppColors.borderColor,
+                          prefixIcon: SvgPicture.asset(AppAssets.facebookIcon, width: 24.w),
+                        ),
+                      ),
+                    ],
+                  ),
+                   Gap(50.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                       Text("Don't have an account? ", style: TextStyle(fontSize: 15.sp)),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                          );
+                        },
+                        child:  Text(
+                          'Register Now',
+                          style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15.sp,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                   Gap(20.h),
+                ],
+              ),
             ),
-            const Gap(20),
-          ],
-        ),
-      ),
-    );
-  },
+          );
+        },
 ),
 );
   }

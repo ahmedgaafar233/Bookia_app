@@ -1,4 +1,5 @@
 import 'package:bookia/features/auth/data/models/login_response_model.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bookia/features/auth/data/repos/auth_repository.dart';
 
@@ -31,6 +32,9 @@ class AuthCubit extends Cubit<AuthState> {
       } else {
         emit(AuthError(response.message ?? 'Login Failed'));
       }
+    } on DioException catch (e) {
+      final message = e.response?.data['message'] ?? 'Login Failed';
+      emit(AuthError(message));
     } catch (e) {
       emit(AuthError(e.toString()));
     }
@@ -55,9 +59,14 @@ class AuthCubit extends Cubit<AuthState> {
       } else {
         emit(AuthError(response.message ?? 'Registration Failed'));
       }
+    } on DioException catch (e) {
+      final message = e.response?.data['message'] ?? 'Registration Failed';
+      emit(AuthError(message));
     } catch (e) {
       emit(AuthError(e.toString()));
     }
+  }
+
   Future<void> forgetPassword(String email) async {
     emit(AuthLoading());
     try {

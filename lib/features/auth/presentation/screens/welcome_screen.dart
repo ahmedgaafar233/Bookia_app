@@ -4,6 +4,7 @@ import 'package:bookia/core/widgets/custom_button.dart';
 import 'package:bookia/features/auth/presentation/screens/login_screen.dart';
 import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -16,55 +17,63 @@ class WelcomeScreen extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(AppAssets.welcomeBg),
+                image: AssetImage(AppAssets.welcomeBgNew),
                 fit: BoxFit.cover,
               ),
             ),
           ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(22.0),
+              padding: EdgeInsets.symmetric(horizontal: 22.w),
               child: Column(
                 children: [
-                  const Spacer(),
+                  const Spacer(flex: 3),
                   // Logo
                   Image.asset(
                     AppAssets.logo,
-                    width: 150,
+                    width: 210.w,
+                    height: 66.h,
                   ),
-                  const Gap(12),
-                  const Text(
-                    'Bookia',
+                  const Gap(10),
+                  Text(
+                    'Order Your Book Now!',
                     style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.secondaryColor,
+                      fontSize: 18.sp,
+                      color: AppColors.secondaryColor.withOpacity(0.8),
                     ),
                   ),
-                  const Spacer(flex: 2),
-                  CustomButton(
-                    text: 'Login',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const LoginScreen()),
-                      );
-                    },
+                  const Spacer(flex: 4),
+                  SizedBox(
+                    width: 331.w,
+                    height: 56.h,
+                    child: CustomButton(
+                      text: 'Login',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const LoginScreen()),
+                        );
+                      },
+                    ),
                   ),
-                  const SizedBox(height: 15),
-                  CustomButton(
-                    text: 'Register',
-                    color: AppColors.white,
-                    textColor: AppColors.secondaryColor,
-                    borderColor: AppColors.secondaryColor,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const RegisterScreen()),
-                      );
-                    },
+                  const Gap(15),
+                  SizedBox(
+                    width: 331.w,
+                    height: 56.h,
+                    child: CustomButton(
+                      text: 'Register',
+                      color: AppColors.white,
+                      textColor: AppColors.secondaryColor,
+                      borderColor: AppColors.secondaryColor,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                        );
+                      },
+                    ),
                   ),
-                  const Spacer(),
+                  const Gap(60),
                 ],
               ),
             ),
