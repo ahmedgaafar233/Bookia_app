@@ -1,15 +1,15 @@
 import 'package:bookia/core/routes/app_routes.dart';
-import 'package:bookia/features/auth/presentation/screens/create_new_password_screen.dart';
-import 'package:bookia/features/auth/presentation/screens/forgot_password_screen.dart';
-import 'package:bookia/features/auth/presentation/screens/login_screen.dart';
-import 'package:bookia/features/auth/presentation/screens/otp_verification_screen.dart';
-import 'package:bookia/features/auth/presentation/screens/password_changed_screen.dart';
-import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
-import 'package:bookia/features/auth/presentation/screens/splash_screen.dart';
-import 'package:bookia/features/auth/presentation/screens/welcome_screen.dart';
+import 'package:bookia/features/auth/presentation/page/create_new_password_screen.dart';
+import 'package:bookia/features/auth/presentation/page/forgot_password_screen.dart';
+import 'package:bookia/features/auth/presentation/page/login_screen.dart';
+import 'package:bookia/features/auth/presentation/page/otp_verification_screen.dart';
+import 'package:bookia/features/auth/presentation/page/password_changed_screen.dart';
+import 'package:bookia/features/auth/presentation/page/register_screen.dart';
+import 'package:bookia/features/auth/presentation/page/splash_screen.dart';
+import 'package:bookia/features/auth/presentation/page/welcome_screen.dart';
 import 'package:bookia/features/home/data/models/product_response_model.dart';
-import 'package:bookia/features/home/presentation/screens/book_details_screen.dart';
-import 'package:bookia/features/home/presentation/screens/home_screen.dart';
+import 'package:bookia/features/home/presentation/page/book_details_screen.dart';
+import 'package:bookia/features/home/presentation/page/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {

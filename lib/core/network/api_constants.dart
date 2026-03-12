@@ -9,4 +9,9 @@ class ApiConstants {
   // Home
   static const String sliders = '/sliders';
   static const String bestSeller = '/products-best-seller';
+
+  // Wishlist
+  static const String wishlist = '/wishlist';
+  static const String addToWishlist = '/add-to-wishlist';
+  static const String removeFromWishlist = '/remove-from-wishlist';
 }
