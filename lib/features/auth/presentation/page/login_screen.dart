@@ -169,7 +169,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Expanded(
                           child: CustomButton(
-                            text: 'Google',
                             onPressed: () {},
                             color: AppColors.white,
                             textColor: AppColors.secondaryColor,
@@ -181,7 +180,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         Gap(8.w),
                         Expanded(
                           child: CustomButton(
-                            text: 'Apple',
                             onPressed: () {},
                             color: AppColors.white,
                             textColor: AppColors.secondaryColor,
@@ -193,7 +191,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         Gap(8.w),
                         Expanded(
                           child: CustomButton(
-                            text: 'Facebook',
                             onPressed: () {},
                             color: AppColors.white,
                             textColor: AppColors.secondaryColor,

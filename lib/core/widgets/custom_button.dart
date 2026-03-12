@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
-    required this.text,
+    this.text,
     required this.onPressed,
     this.color,
     this.textColor,
@@ -17,7 +17,7 @@ class CustomButton extends StatelessWidget {
     this.prefixIcon,
   });
 
-  final String text;
+  final String? text;
   final VoidCallback onPressed;
   final Color? color;
   final Color? textColor;
@@ -48,18 +48,17 @@ class CustomButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (prefixIcon != null) ...[
-              prefixIcon!,
-              Gap(10.w),
-            ],
-            Text(
-              text,
-              style: TextStyle(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w600,
-                color: textColor ?? AppColors.white,
+            if (prefixIcon != null) prefixIcon!,
+            if (prefixIcon != null && text != null && text!.isNotEmpty) Gap(10.w),
+            if (text != null && text!.isNotEmpty)
+              Text(
+                text!,
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w600,
+                  color: textColor ?? AppColors.white,
+                ),
               ),
-            ),
           ],
         ),
       ),
