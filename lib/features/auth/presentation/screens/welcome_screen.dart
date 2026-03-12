@@ -1,11 +1,11 @@
 import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/widgets/custom_button.dart';
-import 'package:bookia/features/auth/presentation/screens/login_screen.dart';
-import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -40,7 +40,7 @@ class WelcomeScreen extends StatelessWidget {
                     'Order Your Book Now!',
                     style: TextStyle(
                       fontSize: 18.sp,
-                      color: AppColors.secondaryColor.withOpacity(0.8),
+                      color: AppColors.secondaryColor.withValues(alpha: 0.8),
                     ),
                   ),
                   const Spacer(flex: 4),
@@ -50,10 +50,7 @@ class WelcomeScreen extends StatelessWidget {
                     child: CustomButton(
                       text: 'Login',
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const LoginScreen()),
-                        );
+                        context.push(AppRoutes.login);
                       },
                     ),
                   ),
@@ -67,10 +64,7 @@ class WelcomeScreen extends StatelessWidget {
                       textColor: AppColors.secondaryColor,
                       borderColor: AppColors.secondaryColor,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const RegisterScreen()),
-                        );
+                        context.push(AppRoutes.register);
                       },
                     ),
                   ),

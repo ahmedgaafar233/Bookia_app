@@ -1,10 +1,11 @@
 import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/widgets/custom_button.dart';
-import 'package:bookia/features/auth/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class PasswordChangedScreen extends StatelessWidget {
   const PasswordChangedScreen({super.key});
@@ -43,11 +44,7 @@ class PasswordChangedScreen extends StatelessWidget {
               width: 226.w,
               height: 85.h,
               onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  (route) => false,
-                );
+                context.go(AppRoutes.login);
               },
             ),
           ],

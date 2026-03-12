@@ -1,18 +1,17 @@
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/network/dio_consumer.dart';
+import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/widgets/custom_button.dart';
 import 'package:bookia/core/widgets/custom_text_field.dart';
 import 'package:bookia/features/auth/data/repos/auth_repository.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:bookia/features/auth/presentation/screens/forgot_password_screen.dart';
-import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
-import 'package:bookia/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -37,11 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.loginResponseModel.message ?? 'Success')),
             );
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-              (route) => false,
-            );
+            context.go(AppRoutes.home);
           } else if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
@@ -64,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: IconButton(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => context.pop(),
                         icon: Icon(Icons.arrow_back_ios_new, size: 15.sp),
                       ),
                     ),
@@ -129,12 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const ForgotPasswordScreen()),
-                          );
+                          context.push(AppRoutes.forgotPassword);
                         },
                         child: Text(
                           'Forgot Password?',
@@ -223,11 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(fontSize: 15.sp)),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const RegisterScreen()),
-                            );
+                              context.pushReplacement(AppRoutes.register);
                           },
                           child: Text(
                             'Register Now',

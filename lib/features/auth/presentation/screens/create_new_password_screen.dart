@@ -1,14 +1,15 @@
 import 'package:bookia/core/network/dio_consumer.dart';
+import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/widgets/custom_button.dart';
 import 'package:bookia/core/widgets/custom_text_field.dart';
 import 'package:bookia/features/auth/data/repos/auth_repository.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:bookia/features/auth/presentation/screens/password_changed_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class CreateNewPasswordScreen extends StatefulWidget {
   final String verifyCode;
@@ -29,10 +30,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const PasswordChangedScreen()),
-            );
+            context.pushReplacement(AppRoutes.passwordChanged);
           } else if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
@@ -55,7 +53,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: IconButton(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => context.pop(),
                         icon: Icon(Icons.arrow_back_ios_new, size: 15.sp),
                       ),
                     ),

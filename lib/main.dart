@@ -1,12 +1,11 @@
+import 'package:bookia/core/routes/app_router.dart';
 import 'package:bookia/core/theme/app_theme.dart';
-import 'package:bookia/features/auth/presentation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   runApp(const BookiaApp());
 }
-
 class BookiaApp extends StatelessWidget {
   const BookiaApp({super.key});
 
@@ -17,11 +16,11 @@ class BookiaApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return MaterialApp.router(
           title: 'Bookia',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
-          home: const SplashScreen(),
+          routerConfig: AppRouter.router,
         );
       },
     );

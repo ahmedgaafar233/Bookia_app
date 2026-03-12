@@ -1,6 +1,8 @@
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/network/dio_consumer.dart';
+import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/utils/app_colors.dart';
+import 'package:bookia/features/home/data/models/product_response_model.dart';
 import 'package:bookia/features/home/data/repos/home_repo.dart';
 import 'package:bookia/features/home/presentation/cubit/home_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -10,9 +12,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:bookia/features/home/presentation/screens/book_details_screen.dart';
-import 'package:bookia/features/home/data/models/product_response_model.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -176,12 +177,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => BookDetailsScreen(product: product),
-          ),
-        );
+        context.push(AppRoutes.bookDetails, extra: product);
       },
       child: Container(
         decoration: BoxDecoration(

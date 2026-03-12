@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class BookDetailsScreen extends StatelessWidget {
   final Product product;
@@ -29,7 +30,7 @@ class BookDetailsScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: IconButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => context.pop(),
                   icon: Icon(Icons.arrow_back_ios_new, size: 15.sp),
                 ),
               ),
@@ -118,7 +119,7 @@ class BookDetailsScreen extends StatelessWidget {
           color: AppColors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, -5),
             ),
