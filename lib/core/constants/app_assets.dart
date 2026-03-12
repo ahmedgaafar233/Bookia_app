@@ -22,4 +22,5 @@ class AppAssets {
   static const String appleIc = 'assets/icons/cib_apple.svg';
   static const String eyeFilled = 'assets/icons/fluent_eye_20_filled.svg';
   static const String searchNormal = 'assets/icons/search_normal.svg';
+  static const String bookmarkSvg = 'assets/icons/bookmark.svg';
 }

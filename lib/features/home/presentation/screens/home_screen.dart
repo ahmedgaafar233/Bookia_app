@@ -11,6 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:bookia/features/home/presentation/screens/book_details_screen.dart';
+import 'package:bookia/features/home/data/models/product_response_model.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -167,69 +169,82 @@ class BestSellerGrid extends StatelessWidget {
 }
 
 class ProductItem extends StatelessWidget {
-  final dynamic product;
+  final Product product;
   const ProductItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xfff5f5f5),
-        borderRadius: BorderRadius.circular(10.r),
-      ),
-      padding: EdgeInsets.all(10.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.r),
-              child: Image.network(
-                product.image ?? '',
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BookDetailsScreen(product: product),
           ),
-          Gap(10.h),
-          Text(
-            product.name ?? '',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-              color: AppColors.secondaryColor,
-            ),
-          ),
-          Gap(5.h),
-          Row(
-            children: [
-              Text(
-                '₹${product.price}',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.secondaryColor,
-                ),
-              ),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.secondaryColor,
-                  foregroundColor: Colors.white,
-                  minimumSize: Size(60.w, 30.h),
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.r),
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xfff5f5f5),
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        padding: EdgeInsets.all(10.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Hero(
+                tag: product.id.toString(),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.r),
+                  child: Image.network(
+                    product.image ?? '',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                child: Text('Buy', style: TextStyle(fontSize: 12.sp)),
               ),
-            ],
-          ),
-        ],
+            ),
+            Gap(10.h),
+            Text(
+              product.name ?? '',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+                color: AppColors.secondaryColor,
+              ),
+            ),
+            Gap(5.h),
+            Row(
+              children: [
+                Text(
+                  '${product.price} EGP',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.secondaryColor,
+                  ),
+                ),
+                const Spacer(),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.secondaryColor,
+                    foregroundColor: Colors.white,
+                    minimumSize: Size(60.w, 30.h),
+                    padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r),
+                    ),
+                  ),
+                  child: Text('Buy', style: TextStyle(fontSize: 12.sp)),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
