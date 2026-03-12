@@ -7,7 +7,7 @@ import 'package:bookia/features/auth/data/repos/auth_repository.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:bookia/features/auth/presentation/screens/register_screen.dart';
-import 'package:dio/dio.dart';
+import 'package:bookia/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,18 +25,23 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(AuthRepository(DioConsumer(Dio()))),
+      create: (context) => AuthCubit(AuthRepository(DioConsumer())),
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.loginResponseModel.message ?? 'Success')),
             );
-            // Navigate to Home (To be implemented)
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              (route) => false,
+            );
           } else if (state is AuthError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),
@@ -69,35 +74,42 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             body: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 22.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                   Gap(30.h),
-                   Text(
-                    'Welcome back! Glad to see you, Again!',
-                    style: TextStyle(
-                      fontSize: 30.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.secondaryColor,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gap(30.h),
+                    Text(
+                      'Welcome back! Glad to see you, Again!',
+                      style: TextStyle(
+                        fontSize: 30.sp,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.secondaryColor,
+                      ),
                     ),
-                  ),
-                   Gap(32.h),
-                  SizedBox(
-                    width: 331.w,
-                    height: 56.h,
-                    child: CustomTextField(
+                    Gap(32.h),
+                    CustomTextField(
                       hintText: 'Enter your email',
                       controller: _emailController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email';
+                        }
+                        return null;
+                      },
                     ),
-                  ),
-                   Gap(15.h),
-                  SizedBox(
-                    width: 331.w,
-                    height: 56.h,
-                    child: CustomTextField(
+                    Gap(15.h),
+                    CustomTextField(
                       hintText: 'Enter your password',
                       controller: _passwordController,
                       obscureText: !_isPasswordVisible,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
                       suffixIcon: IconButton(
                         onPressed: () {
                           setState(() {
@@ -105,134 +117,136 @@ class _LoginScreenState extends State<LoginScreen> {
                           });
                         },
                         icon: Icon(
-                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          _isPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                           color: AppColors.darkGrey,
                         ),
                       ),
                     ),
-                  ),
-                   Gap(12.h),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ForgotPasswordScreen()),
-                        );
-                      },
-                      child:  Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: AppColors.darkGrey, fontSize: 14.sp),
-                      ),
-                    ),
-                  ),
-                   Gap(30.h),
-                  state is AuthLoading
-                      ? const Center(child: CircularProgressIndicator())
-                      : CustomButton(
-                          text: 'Login',
-                          onPressed: () {
-                            context.read<AuthCubit>().login(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                );
-                          },
-                        ),
-                   Gap(35.h),
-                  Row(
-                    children: [
-                       Expanded(child: Divider(color: AppColors.borderColor, thickness: 1)),
-                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        child: Text('Or Login with', style: TextStyle(color: AppColors.darkGrey, fontSize: 14.sp)),
-                      ),
-                       Expanded(child: Divider(color: AppColors.borderColor, thickness: 1)),
-                    ],
-                  ),
-                   Gap(22.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          text: 'Google',
-                          onPressed: () {},
-                          color: AppColors.white,
-                          textColor: AppColors.secondaryColor,
-                          borderColor: AppColors.borderColor,
-                          prefixIcon: SvgPicture.asset(AppAssets.googleIc, width: 24.w),
-                        ),
-                      ),
-                       Gap(8.w),
-                      Expanded(
-                        child: CustomButton(
-                          text: 'Apple',
-                          onPressed: () {},
-                          color: AppColors.white,
-                          textColor: AppColors.secondaryColor,
-                          borderColor: AppColors.borderColor,
-                          prefixIcon: SvgPicture.asset(AppAssets.appleIc, width: 24.w),
-                        ),
-                      ),
-                       Gap(8.w),
-                      Expanded(
-                        child: CustomButton(
-                          text: 'Facebook',
-                          onPressed: () {},
-                          color: AppColors.white,
-                          textColor: AppColors.secondaryColor,
-                          borderColor: AppColors.borderColor,
-                          prefixIcon: SvgPicture.asset(AppAssets.facebookIcon, width: 24.w),
-                        ),
-                      ),
-                    ],
-                  ),
-                   Gap(50.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                       Text("Don't have an account? ", style: TextStyle(fontSize: 15.sp)),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(
+                    Gap(12.h),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const ForgotPasswordScreen()),
                           );
                         },
-                        child:  Text(
-                          'Register Now',
+                        child: Text(
+                          'Forgot Password?',
                           style: TextStyle(
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15.sp,
-                          ),
+                              color: AppColors.darkGrey, fontSize: 14.sp),
                         ),
                       ),
-                    ],
-                  ),
-                   Gap(20.h),
-                ],
+                    ),
+                    Gap(30.h),
+                    state is AuthLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : CustomButton(
+                            text: 'Login',
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                context.read<AuthCubit>().login(
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                    );
+                              }
+                            },
+                          ),
+                    Gap(35.h),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Divider(
+                                color: AppColors.borderColor, thickness: 1)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
+                          child: Text('Or Login with',
+                              style: TextStyle(
+                                  color: AppColors.darkGrey, fontSize: 14.sp)),
+                        ),
+                        Expanded(
+                            child: Divider(
+                                color: AppColors.borderColor, thickness: 1)),
+                      ],
+                    ),
+                    Gap(22.h),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomButton(
+                            text: 'Google',
+                            onPressed: () {},
+                            color: AppColors.white,
+                            textColor: AppColors.secondaryColor,
+                            borderColor: AppColors.borderColor,
+                            prefixIcon: SvgPicture.asset(AppAssets.googleIc,
+                                width: 24.w),
+                          ),
+                        ),
+                        Gap(8.w),
+                        Expanded(
+                          child: CustomButton(
+                            text: 'Apple',
+                            onPressed: () {},
+                            color: AppColors.white,
+                            textColor: AppColors.secondaryColor,
+                            borderColor: AppColors.borderColor,
+                            prefixIcon: SvgPicture.asset(AppAssets.appleIc,
+                                width: 24.w),
+                          ),
+                        ),
+                        Gap(8.w),
+                        Expanded(
+                          child: CustomButton(
+                            text: 'Facebook',
+                            onPressed: () {},
+                            color: AppColors.white,
+                            textColor: AppColors.secondaryColor,
+                            borderColor: AppColors.borderColor,
+                            prefixIcon: SvgPicture.asset(
+                                AppAssets.facebookIcon,
+                                width: 24.w),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Gap(50.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Don't have an account? ",
+                            style: TextStyle(fontSize: 15.sp)),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const RegisterScreen()),
+                            );
+                          },
+                          child: Text(
+                            'Register Now',
+                            style: TextStyle(
+                              color: AppColors.primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15.sp,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Gap(20.h),
+                  ],
+                ),
               ),
             ),
           );
         },
-),
-);
-  }
-
-  Widget _socialButton(String iconPath) {
-    return Container(
-      width: 105,
-      height: 56,
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.borderColor),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Center(
-        child: SvgPicture.asset(
-          iconPath,
-          width: 30,
-        ),
       ),
     );
   }

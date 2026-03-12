@@ -3,21 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bookia/features/auth/data/repos/auth_repository.dart';
 
-abstract class AuthState {}
-
-class AuthInitial extends AuthState {}
-
-class AuthLoading extends AuthState {}
-
-class AuthSuccess extends AuthState {
-  final LoginResponseModel loginResponseModel;
-  AuthSuccess(this.loginResponseModel);
-}
-
-class AuthError extends AuthState {
-  final String message;
-  AuthError(this.message);
-}
+part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository authRepository;

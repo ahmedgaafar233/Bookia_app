@@ -1,4 +1,3 @@
-import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/network/dio_consumer.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/widgets/custom_button.dart';
@@ -6,7 +5,6 @@ import 'package:bookia/core/widgets/custom_text_field.dart';
 import 'package:bookia/features/auth/data/repos/auth_repository.dart';
 import 'package:bookia/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:bookia/features/auth/presentation/screens/otp_verification_screen.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +23,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(AuthRepository(DioConsumer(Dio()))),
+      create: (context) => AuthCubit(AuthRepository(DioConsumer())),
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {

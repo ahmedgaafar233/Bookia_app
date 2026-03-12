@@ -3,11 +3,11 @@ import 'package:bookia/core/network/api_constants.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioConsumer {
-  final Dio dio;
+  static final Dio _dio = Dio();
 
-  DioConsumer(this.dio) {
-    dio.options.baseUrl = ApiConstants.baseUrl;
-    dio.interceptors.add(PrettyDioLogger(
+  DioConsumer() {
+    _dio.options.baseUrl = ApiConstants.baseUrl;
+    _dio.interceptors.add(PrettyDioLogger(
       requestHeader: true,
       requestBody: true,
       responseHeader: true,
@@ -23,7 +23,7 @@ class DioConsumer {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
-    return await dio.post(
+    return await _dio.post(
       path,
       data: data,
       queryParameters: queryParameters,
@@ -36,7 +36,7 @@ class DioConsumer {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
-    return await dio.get(
+    return await _dio.get(
       path,
       queryParameters: queryParameters,
       options: options,
