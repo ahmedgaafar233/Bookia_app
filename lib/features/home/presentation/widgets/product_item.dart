@@ -1,8 +1,12 @@
+import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/features/home/data/models/product_response_model.dart';
+import 'package:bookia/features/wishlist/presentation/cubit/wishlist_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,16 +30,38 @@ class ProductItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Hero(
-                tag: product.id.toString(),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.r),
-                  child: Image.network(
-                    product.image ?? '',
-                    width: double.infinity,
-                    fit: BoxFit.cover,
+              child: Stack(
+                children: [
+                  Hero(
+                    tag: product.id.toString(),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.r),
+                      child: Image.network(
+                        product.image ?? '',
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
+                  Positioned(
+                    top: 10.h,
+                    right: 10.w,
+                    child: GestureDetector(
+                      onTap: () {
+                        context
+                            .read<WishlistCubit>()
+                            .addToWishlist(productId: product.id ?? 0);
+                      },
+                      child: SvgPicture.asset(
+                        AppAssets.bookmarkSvg,
+                        colorFilter: const ColorFilter.mode(
+                          AppColors.white,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Gap(10.h),

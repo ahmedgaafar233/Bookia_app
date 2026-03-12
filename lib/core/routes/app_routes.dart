@@ -7,6 +7,8 @@ class AppRoutes {
   static const String otpVerification = '/otp-verification';
   static const String createPassword = '/create-password';
   static const String passwordChanged = '/password-changed';
+  static const String main = '/main';
   static const String home = '/home';
   static const String bookDetails = '/book-details';
+  static const String wishlist = '/wishlist';
 }

@@ -10,6 +10,8 @@ import 'package:bookia/features/auth/presentation/page/welcome_screen.dart';
 import 'package:bookia/features/home/data/models/product_response_model.dart';
 import 'package:bookia/features/home/presentation/page/book_details_screen.dart';
 import 'package:bookia/features/home/presentation/page/home_screen.dart';
+import 'package:bookia/features/main/presentation/page/main_screen.dart';
+import 'package:bookia/features/wishlist/presentation/page/wishlist_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -55,6 +57,10 @@ class AppRouter {
         builder: (context, state) => const PasswordChangedScreen(),
       ),
       GoRoute(
+        path: AppRoutes.main,
+        builder: (context, state) => const MainScreen(),
+      ),
+      GoRoute(
         path: AppRoutes.home,
         builder: (context, state) => const HomeScreen(),
       ),
@@ -64,6 +70,10 @@ class AppRouter {
           final product = state.extra as Product;
           return BookDetailsScreen(product: product);
         },
+      ),
+      GoRoute(
+        path: AppRoutes.wishlist,
+        builder: (context, state) => const WishlistScreen(),
       ),
     ],
   );

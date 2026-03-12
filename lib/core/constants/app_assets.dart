@@ -23,4 +23,7 @@ class AppAssets {
   static const String eyeFilled = 'assets/icons/fluent_eye_20_filled.svg';
   static const String searchNormal = 'assets/icons/search_normal.svg';
   static const String bookmarkSvg = 'assets/icons/bookmark.svg';
+  static const String homeSvg = 'assets/icons/home.svg';
+  static const String categorySvg = 'assets/icons/category.svg';
+  static const String profileSvg = 'assets/icons/profile.svg';
 }
