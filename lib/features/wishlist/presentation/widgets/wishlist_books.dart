@@ -14,10 +14,13 @@ class WishlistBooks extends StatelessWidget {
         if (state is GetWishlistLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (products == null || products.isEmpty) {
-          return const Center(child: Text('Your wishlist is empty'));
-        }
-        return ProductGridView(products: products);
+        return ProductGridView(
+          products: products ?? [],
+          isWishlist: true,
+          onRefresh: () {
+            context.read<WishlistCubit>().getWishlist();
+          },
+        );
       },
     );
   }

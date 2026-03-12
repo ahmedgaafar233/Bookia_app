@@ -1,7 +1,7 @@
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/features/home/presentation/cubit/home_cubit.dart';
 import 'package:bookia/features/home/presentation/widgets/best_seller_shimmer.dart';
-import 'package:bookia/features/home/presentation/widgets/product_item.dart';
+import 'package:bookia/features/home/presentation/widgets/book_card.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,7 +54,7 @@ class BestSellerBooks extends StatelessWidget {
                   ),
                   itemCount: products.length,
                   itemBuilder: (context, index) {
-                    return ProductItem(product: products[index]);
+                    return BookCard(product: products[index]);
                   },
                 );
               },
