@@ -1,9 +1,12 @@
 import 'package:bookia/core/routes/app_router.dart';
+import 'package:bookia/core/services/local/shared_prefs.dart';
 import 'package:bookia/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefs.init();
   runApp(const BookiaApp());
 }
 class BookiaApp extends StatelessWidget {

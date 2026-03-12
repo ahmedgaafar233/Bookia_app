@@ -29,63 +29,73 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WishlistCubit(WishlistRepository(DioConsumer()))..getWishlist(),
+      create: (context) =>
+          WishlistCubit(WishlistRepository(DioConsumer()))..getWishlist(),
       child: Scaffold(
         body: _screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: AppColors.primaryColor,
-        unselectedItemColor: AppColors.darkGrey,
-        items: [
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              AppAssets.homeSvg,
-              colorFilter: ColorFilter.mode(
-                _selectedIndex == 0 ? AppColors.primaryColor : AppColors.darkGrey,
-                BlendMode.srcIn,
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: AppColors.primaryColor,
+          unselectedItemColor: AppColors.darkGrey,
+          items: [
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                AppAssets.homeSvg,
+                colorFilter: ColorFilter.mode(
+                  _selectedIndex == 0
+                      ? AppColors.primaryColor
+                      : AppColors.darkGrey,
+                  BlendMode.srcIn,
+                ),
               ),
+              label: 'Home',
             ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              AppAssets.bookmarkSvg,
-              colorFilter: ColorFilter.mode(
-                _selectedIndex == 1 ? AppColors.primaryColor : AppColors.darkGrey,
-                BlendMode.srcIn,
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                AppAssets.bookmarkSvg,
+                colorFilter: ColorFilter.mode(
+                  _selectedIndex == 1
+                      ? AppColors.primaryColor
+                      : AppColors.darkGrey,
+                  BlendMode.srcIn,
+                ),
               ),
+              label: 'Wishlist',
             ),
-            label: 'Wishlist',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              AppAssets.categorySvg,
-              colorFilter: ColorFilter.mode(
-                _selectedIndex == 2 ? AppColors.primaryColor : AppColors.darkGrey,
-                BlendMode.srcIn,
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                AppAssets.categorySvg,
+                colorFilter: ColorFilter.mode(
+                  _selectedIndex == 2
+                      ? AppColors.primaryColor
+                      : AppColors.darkGrey,
+                  BlendMode.srcIn,
+                ),
               ),
+              label: 'Cart',
             ),
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              AppAssets.profileSvg,
-              colorFilter: ColorFilter.mode(
-                _selectedIndex == 3 ? AppColors.primaryColor : AppColors.darkGrey,
-                BlendMode.srcIn,
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                AppAssets.profileSvg,
+                colorFilter: ColorFilter.mode(
+                  _selectedIndex == 3
+                      ? AppColors.primaryColor
+                      : AppColors.darkGrey,
+                  BlendMode.srcIn,
+                ),
               ),
+              label: 'Profile',
             ),
-            label: 'Profile',
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

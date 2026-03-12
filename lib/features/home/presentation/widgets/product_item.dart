@@ -1,3 +1,4 @@
+import 'package:bookia/core/services/local/shared_prefs.dart';
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/utils/app_colors.dart';
@@ -46,19 +47,35 @@ class ProductItem extends StatelessWidget {
                   Positioned(
                     top: 10.h,
                     right: 10.w,
-                    child: GestureDetector(
-                      onTap: () {
-                        context
-                            .read<WishlistCubit>()
-                            .addToWishlist(productId: product.id ?? 0);
+                    child: BlocBuilder<WishlistCubit, WishlistState>(
+                      buildWhen: (previous, current) =>
+                          current is GetWishlistSuccess ||
+                          current is AddToWishlistSuccess ||
+                          current is RemoveFromWishlistSuccess,
+                      builder: (context, state) {
+                        bool isInWishlist = SharedPrefs.getWishlistIds()
+                            .contains(product.id.toString());
+                        return GestureDetector(
+                          onTap: () {
+                            if (isInWishlist) {
+                              context.read<WishlistCubit>().removeFromWishlist(
+                                  productId: product.id ?? 0);
+                            } else {
+                              context.read<WishlistCubit>().addToWishlist(
+                                  productId: product.id ?? 0);
+                            }
+                          },
+                          child: SvgPicture.asset(
+                            AppAssets.bookmarkSvg,
+                            colorFilter: ColorFilter.mode(
+                              isInWishlist
+                                  ? AppColors.primaryColor
+                                  : AppColors.white,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        );
                       },
-                      child: SvgPicture.asset(
-                        AppAssets.bookmarkSvg,
-                        colorFilter: const ColorFilter.mode(
-                          AppColors.white,
-                          BlendMode.srcIn,
-                        ),
-                      ),
                     ),
                   ),
                 ],
