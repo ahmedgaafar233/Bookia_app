@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
 
 class BookDetailsScreen extends StatelessWidget {
@@ -78,11 +79,18 @@ class BookDetailsScreen extends StatelessWidget {
                   tag: product.id.toString(),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.r),
-                    child: Image.network(
-                      product.image ?? '',
+                    child: CachedNetworkImage(
+                      imageUrl: product.image ?? '',
                       width: 183.w,
                       height: 271.h,
                       fit: BoxFit.cover,
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                 ),

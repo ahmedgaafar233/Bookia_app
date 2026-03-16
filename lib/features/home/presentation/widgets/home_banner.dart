@@ -4,6 +4,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeBanner extends StatelessWidget {
@@ -30,11 +31,18 @@ class HomeBanner extends StatelessWidget {
               itemBuilder: (context, index, realIndex) {
                 return Container(
                   margin: EdgeInsets.symmetric(horizontal: 5.w),
-                  decoration: BoxDecoration(
+                  child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.r),
-                    image: DecorationImage(
-                      image: NetworkImage(sliders[index].image ?? ''),
+                    child: CachedNetworkImage(
+                      imageUrl: sliders[index].image ?? '',
                       fit: BoxFit.cover,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(color: Colors.white),
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
                 );

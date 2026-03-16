@@ -16,7 +16,9 @@ class WishlistCubit extends Cubit<WishlistState> {
     emit(GetWishlistLoading());
     try {
       wishlistModel = await wishlistRepository.getWishlist();
-      if (wishlistModel?.status == 200) {
+      if (wishlistModel?.status != null &&
+          wishlistModel!.status! >= 200 &&
+          wishlistModel!.status! < 300) {
         _cacheWishlistIds();
         emit(GetWishlistSuccess());
       } else {

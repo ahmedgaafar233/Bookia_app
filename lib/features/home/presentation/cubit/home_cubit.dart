@@ -16,7 +16,9 @@ class HomeCubit extends Cubit<HomeState> {
     emit(GetSlidersLoading());
     try {
       sliderResponseModel = await homeRepository.getSliders();
-      if (sliderResponseModel?.status == 200) {
+      if (sliderResponseModel?.status != null &&
+          sliderResponseModel!.status! >= 200 &&
+          sliderResponseModel!.status! < 300) {
         emit(GetSlidersSuccess());
       } else {
         emit(GetSlidersError());
@@ -30,7 +32,9 @@ class HomeCubit extends Cubit<HomeState> {
     emit(GetBestSellerLoading());
     try {
       productResponseModel = await homeRepository.getBestSeller();
-      if (productResponseModel?.status == 200) {
+      if (productResponseModel?.status != null &&
+          productResponseModel!.status! >= 200 &&
+          productResponseModel!.status! < 300) {
         emit(GetBestSellerSuccess());
       } else {
         emit(GetBestSellerError());

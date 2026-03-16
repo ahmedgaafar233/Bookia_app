@@ -17,7 +17,9 @@ class WishlistRepository {
       ApiConstants.addToWishlist,
       data: {'product_id': productId},
     );
-    return response.statusCode == 200;
+    return response.statusCode != null &&
+        response.statusCode! >= 200 &&
+        response.statusCode! < 300;
   }
 
   Future<bool> removeFromWishlist({required int productId}) async {
@@ -25,6 +27,8 @@ class WishlistRepository {
       ApiConstants.removeFromWishlist,
       data: {'product_id': productId},
     );
-    return response.statusCode == 200;
+    return response.statusCode != null &&
+        response.statusCode! >= 200 &&
+        response.statusCode! < 300;
   }
 }

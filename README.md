@@ -1,16 +1,41 @@
-# bookia
+# Bookia App 📚
 
-A new Flutter project.
+A premium Flutter application for book lovers, featuring a smooth user experience, modern design, and robust networking.
 
-## Getting Started
+## ✨ Features
 
-This project is a starting point for a Flutter application.
+- **Authentication**: Secure login, registration, and password recovery.
+- **Home**: Browse sliders and explore best-selling books.
+- **Wishlist**: Save your favorite books for later.
+- **Book Details**: Detailed information about each book with a premium UI.
+- **Image Caching**: Optimized performance using `cached_network_image`.
+- **Responsive Design**: Built with `flutter_screenutil` for all screen sizes.
 
-A few resources to get you started if this is your first Flutter project:
+## 📸 Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+| Home Screen | Book Details |
+| :---: | :---: |
+| ![Home](assets/screenshots/home.png) | ![Details](assets/screenshots/details.png) |
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🚀 Getting Started
+
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   ```
+2. **Install dependencies**:
+   ```bash
+   flutter pub get
+   ```
+3. **Run the app**:
+   ```bash
+   flutter run
+   ```
+
+## 🛠 Tech Stack
+
+- **State Management**: Flutter Bloc (Cubit)
+- **Networking**: Dio
+- **Navigation**: GoRouter
+- **Design**: Vanilla CSS approach with ScreenUtil
+- **Image Handling**: Cached Network Image

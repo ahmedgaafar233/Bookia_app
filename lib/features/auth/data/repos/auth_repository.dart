@@ -44,7 +44,9 @@ class AuthRepository {
       ApiConstants.forgetPassword,
       data: {'email': email},
     );
-    return response.statusCode == 200;
+    return response.statusCode != null &&
+        response.statusCode! >= 200 &&
+        response.statusCode! < 300;
   }
 
   Future<bool> checkForgetPasswordCode({
@@ -58,7 +60,9 @@ class AuthRepository {
         'verify_code': verifyCode,
       },
     );
-    return response.statusCode == 200;
+    return response.statusCode != null &&
+        response.statusCode! >= 200 &&
+        response.statusCode! < 300;
   }
 
   Future<bool> resetPassword({
@@ -74,6 +78,8 @@ class AuthRepository {
         'new_password_confirmation': newPasswordConfirmation,
       },
     );
-    return response.statusCode == 200;
+    return response.statusCode != null &&
+        response.statusCode! >= 200 &&
+        response.statusCode! < 300;
   }
 }

@@ -5,6 +5,7 @@ import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/functions/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:gap/gap.dart';
 
 class BookCard extends StatelessWidget {
@@ -43,10 +44,17 @@ class BookCard extends StatelessWidget {
                     tag: product.id.toString(),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10.r),
-                      child: Image.network(
-                        product.image ?? '',
+                      child: CachedNetworkImage(
+                        imageUrl: product.image ?? '',
                         width: double.infinity,
                         fit: BoxFit.cover,
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
                     ),
                   ),

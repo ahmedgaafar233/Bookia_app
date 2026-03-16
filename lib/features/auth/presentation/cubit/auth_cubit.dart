@@ -13,7 +13,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     try {
       final response = await authRepository.login(email: email, password: password);
-      if (response.status == 200) {
+      if (response.status != null && response.status! >= 200 && response.status! < 300) {
         emit(AuthSuccess(response));
       } else {
         emit(AuthError(response.message ?? 'Login Failed'));
@@ -40,7 +40,7 @@ class AuthCubit extends Cubit<AuthState> {
         password: password,
         passwordConfirmation: passwordConfirmation,
       );
-      if (response.status == 201) {
+      if (response.status != null && response.status! >= 200 && response.status! < 300) {
         emit(AuthSuccess(response));
       } else {
         emit(AuthError(response.message ?? 'Registration Failed'));
