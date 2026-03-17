@@ -1,5 +1,5 @@
-import 'package:bookia/features/home/data/models/product_response_model.dart';
-import 'package:bookia/features/home/presentation/widgets/book_card.dart';
+import 'package:bookia/feature/home/data/models/product_response_model.dart';
+import 'package:bookia/feature/home/presentation/widgets/book_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

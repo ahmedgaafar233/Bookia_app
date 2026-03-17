@@ -14,4 +14,14 @@ class ApiConstants {
   static const String wishlist = '/wishlist';
   static const String addToWishlist = '/add-to-wishlist';
   static const String removeFromWishlist = '/remove-from-wishlist';
+
+  // Cart
+  static const String cart = '/cart';
+  static const String addToCart = '/add-to-cart';
+  static const String updateCart = '/update-cart';
+  static const String removeFromCart = '/remove-from-cart';
+
+  // Order
+  static const String placeOrder = '/place-order';
+  static const String governorates = '/governorates';
 }

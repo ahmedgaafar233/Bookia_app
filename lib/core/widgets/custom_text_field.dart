@@ -11,6 +11,8 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.validator,
     this.keyboardType,
+    this.readOnly = false,
+    this.onTap,
   });
 
   final String hintText;
@@ -20,6 +22,8 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
+  final bool readOnly;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,8 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       validator: validator,
       keyboardType: keyboardType,
+      readOnly: readOnly,
+      onTap: onTap,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: const TextStyle(color: AppColors.darkGrey, fontSize: 15),

@@ -1,17 +1,24 @@
 import 'package:bookia/core/routes/app_routes.dart';
-import 'package:bookia/features/auth/presentation/page/create_new_password_screen.dart';
-import 'package:bookia/features/auth/presentation/page/forgot_password_screen.dart';
-import 'package:bookia/features/auth/presentation/page/login_screen.dart';
-import 'package:bookia/features/auth/presentation/page/otp_verification_screen.dart';
-import 'package:bookia/features/auth/presentation/page/password_changed_screen.dart';
-import 'package:bookia/features/auth/presentation/page/register_screen.dart';
-import 'package:bookia/features/auth/presentation/page/splash_screen.dart';
-import 'package:bookia/features/auth/presentation/page/welcome_screen.dart';
-import 'package:bookia/features/home/data/models/product_response_model.dart';
-import 'package:bookia/features/home/presentation/page/book_details_screen.dart';
-import 'package:bookia/features/home/presentation/page/home_screen.dart';
-import 'package:bookia/features/main/presentation/page/main_screen.dart';
-import 'package:bookia/features/wishlist/presentation/page/wishlist_screen.dart';
+import 'package:bookia/feature/auth/presentation/page/create_new_password_screen.dart';
+import 'package:bookia/feature/auth/presentation/page/forgot_password_screen.dart';
+import 'package:bookia/feature/auth/presentation/page/login_screen.dart';
+import 'package:bookia/feature/auth/presentation/page/otp_verification_screen.dart';
+import 'package:bookia/feature/auth/presentation/page/password_changed_screen.dart';
+import 'package:bookia/feature/auth/presentation/page/register_screen.dart';
+import 'package:bookia/feature/auth/presentation/page/splash_screen.dart';
+import 'package:bookia/feature/auth/presentation/page/welcome_screen.dart';
+import 'package:bookia/feature/home/data/models/product_response_model.dart';
+import 'package:bookia/feature/details/presentation/page/details_screen.dart';
+import 'package:bookia/feature/home/presentation/page/home_screen.dart';
+import 'package:bookia/feature/main/presentation/page/main_screen.dart';
+import 'package:bookia/feature/wishlist/presentation/page/wishlist_screen.dart';
+import 'package:bookia/feature/cart/presentation/page/cart_screen.dart';
+import 'package:bookia/feature/place_order/presentation/cubit/place_order_cubit.dart';
+import 'package:bookia/feature/place_order/data/repository/place_order_repo.dart';
+import 'package:bookia/feature/place_order/presentation/page/place_order_screen.dart';
+import 'package:bookia/feature/place_order/presentation/page/checkout_success_screen.dart';
+import 'package:bookia/core/network/dio_consumer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -68,12 +75,26 @@ class AppRouter {
         path: AppRoutes.bookDetails,
         builder: (context, state) {
           final product = state.extra as Product;
-          return BookDetailsScreen(product: product);
+          return DetailsScreen(product: product);
         },
       ),
       GoRoute(
         path: AppRoutes.wishlist,
         builder: (context, state) => const WishlistScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.checkout,
+        builder: (context, state) {
+          final total = state.extra as String;
+          return BlocProvider(
+            create: (context) => PlaceOrderCubit(PlaceOrderRepository(DioConsumer())),
+            child: PlaceOrderScreen(total: total),
+          );
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.checkoutSuccess,
+        builder: (context, state) => const CheckoutSuccessScreen(),
       ),
     ],
   );
