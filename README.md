@@ -13,9 +13,9 @@ A premium Flutter application for book lovers, featuring a smooth user experienc
 
 ## 📸 Screenshots
 
-| Home Screen | Book Details |
-| :---: | :---: |
-| ![Home](assets/screenshots/home.png) | ![Details](assets/screenshots/details.png) |
+| Home Screen | Book Details | Wishlist Screen | Cart Screen |
+| :---: | :---: | :---: | :---: |
+| ![Home](assets/images/home.png) | ![Details](assets/images/book_details.png) | ![Wishlist](assets/images/wishlist.png) | ![Cart](assets/images/cart.png) |
 
 ## 🚀 Getting Started
 
