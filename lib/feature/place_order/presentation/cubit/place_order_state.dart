@@ -1,3 +1,5 @@
+part of 'place_order_cubit.dart';
+
 abstract class PlaceOrderState {}
 
 class PlaceOrderInitial extends PlaceOrderState {}

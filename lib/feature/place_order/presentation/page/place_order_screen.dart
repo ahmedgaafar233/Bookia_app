@@ -1,11 +1,11 @@
 import 'package:bookia/core/functions/navigation.dart';
+import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_text_field.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
-import 'package:bookia/core/widgets/main_button.dart';
+import 'package:bookia/core/widgets/custom_button.dart';
 import 'package:bookia/feature/place_order/data/models/governorate.dart';
 import 'package:bookia/feature/place_order/presentation/cubit/place_order_cubit.dart';
-import 'package:bookia/feature/place_order/presentation/cubit/place_order_state.dart';
 import 'package:bookia/feature/place_order/presentation/widgets/gov_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -82,10 +82,10 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
             showLoadingDialog(context);
           } else if (state is PlaceOrderSuccessState) {
             Navigator.pop(context); // Close loading
-            // TODO: pushToSuccessScreen
+            pushAndRemoveUntil(context, AppRoutes.checkoutSuccess);
           } else if (state is PlaceOrderErrorState) {
             Navigator.pop(context); // Close loading
-            showMyDialog(context, 'Failed to place order. Please try again.');
+            showErrorDialog(context, 'Failed to place order. Please try again.');
           }
         },
         builder: (context, state) {
@@ -169,7 +169,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
                     ],
                   ),
                   const Gap(20),
-                  MainButton(
+                  CustomButton(
                     text: 'Submit Order',
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {

@@ -1,3 +1,5 @@
+part of 'cart_action_cubit.dart';
+
 abstract class CartActionState {}
 
 class CartActionInitial extends CartActionState {}

@@ -1,0 +1,22 @@
+Analyzing bookia...                                             
+
+warning • Unused import: 'package:bookia/feature/cart/presentation/page/cart_screen.dart' • lib/core/routes/app_router.dart:15:8 • unused_import
+   info • Use the null-aware marker '?' rather than a null check via an 'if' • lib/core/widgets/custom_button.dart:51:13 • use_null_aware_elements
+warning • Unused import: 'package:bookia/feature/cart/data/models/cart_response/data.dart' • lib/feature/cart/presentation/cubit/cart_cubit.dart:4:8 • unused_import
+warning • Unused import: 'package:bookia/core/utils/app_colors.dart' • lib/feature/cart/presentation/page/cart_screen.dart:2:8 • unused_import
+warning • Unused import: 'package:bookia/core/widgets/custom_button.dart' • lib/feature/cart/presentation/page/cart_screen.dart:3:8 • unused_import
+warning • Unused import: 'package:flutter_screenutil/flutter_screenutil.dart' • lib/feature/cart/presentation/page/cart_screen.dart:9:8 • unused_import
+warning • Unused import: 'package:gap/gap.dart' • lib/feature/cart/presentation/page/cart_screen.dart:10:8 • unused_import
+warning • Unused import: 'package:bookia/core/functions/navigation.dart' • lib/feature/cart/presentation/widgets/cart_books.dart:1:8 • unused_import
+warning • Unused import: 'package:flutter_screenutil/flutter_screenutil.dart' • lib/feature/cart/presentation/widgets/cart_books.dart:11:8 • unused_import
+warning • Unused import: 'package:gap/gap.dart' • lib/feature/cart/presentation/widgets/cart_books.dart:12:8 • unused_import
+warning • Unused import: 'package:bookia/feature/cart/data/models/cart_response/cart_response.dart' • lib/feature/cart/presentation/widgets/cart_item_widget.dart:3:8 • unused_import
+   info • The argument type 'String' isn't related to 'int' • lib/feature/home/presentation/widgets/wishlist_icon.dart:23:23 • collection_methods_unrelated_type
+warning • Unused import: 'package:bookia/feature/place_order/data/models/governorates_response.dart' • lib/feature/place_order/presentation/cubit/place_order_cubit.dart:2:8 • unused_import
+warning • Unused import: 'package:gap/gap.dart' • lib/feature/profile/presentation/page/my_orders_screen.dart:13:8 • unused_import
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/feature/profile/presentation/page/my_orders_screen.dart:51:47 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/feature/profile/presentation/page/my_orders_screen.dart:75:63 • deprecated_member_use
+warning • Unused import: 'package:bookia/core/functions/navigation.dart' • lib/feature/profile/presentation/page/profile_screen.dart:2:8 • unused_import
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/feature/profile/presentation/page/profile_screen.dart:114:33 • deprecated_member_use
+warning • Unused import: 'package:bookia/core/utils/app_colors.dart' • lib/feature/search/presentation/page/search_screen.dart:5:8 • unused_import
+

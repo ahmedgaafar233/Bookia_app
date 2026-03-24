@@ -20,7 +20,7 @@ class WishlistIcon extends StatelessWidget {
           current is RemoveFromWishlistSuccess,
       builder: (context, state) {
         bool isInWishlist = SharedPrefs.getWishlistIds()
-            .contains(productId.toString());
+            .contains(productId);
         return GestureDetector(
           onTap: () {
             if (isInWishlist) {

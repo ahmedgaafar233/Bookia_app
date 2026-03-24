@@ -1,41 +1,37 @@
-# Bookia App 📚
+# Bookia Store
 
-A premium Flutter application for book lovers, featuring a smooth user experience, modern design, and robust networking.
+A Flutter e-commerce application for booking and buying books. It integrates with a RESTful API and uses Cubit/Bloc for state management.
 
-## ✨ Features
+## Features
+- **Authentication**: Login, Register, Forgot Password, and complete user sessions.
+- **Home & Search**: Browse bestsellers, sliders, and search for books.
+- **Wishlist & Cart**: Add products to your wishlist or cart from anywhere in the app.
+- **Checkout**: Full checkout flow with governorate selection and place order logic.
+- **Profile**: Manage your profile, view orders, update password, and access Settings (FAQ, Contact Us, Privacy).
 
-- **Authentication**: Secure login, registration, and password recovery.
-- **Home**: Browse sliders and explore best-selling books.
-- **Wishlist**: Save your favorite books for later.
-- **Book Details**: Detailed information about each book with a premium UI.
-- **Image Caching**: Optimized performance using `cached_network_image`.
-- **Responsive Design**: Built with `flutter_screenutil` for all screen sizes.
+## Screenshots
+*(Add your screenshots here)*
+- [x] Home Screen
+- [x] Search Screen
+- [x] Book Details
+- [x] Cart
+- [x] Profile & Settings
+- [x] Contact Us
 
-## 📸 Screenshots
+## Video Walkthrough
+*(Embed a video or add a link to a walkthrough of the app here)*
 
-| Home Screen | Book Details | Wishlist Screen | Cart Screen |
-| :---: | :---: | :---: | :---: |
-| ![Home](assets/images/home.png) | ![Details](assets/images/book_details.png) | ![Wishlist](assets/images/wishlist.png) | ![Cart](assets/images/cart.png) |
+## How to Run
+1. Make sure Flutter is installed.
+2. Clone the repository.
+3. Run `flutter pub get`.
+4. Run `flutter run` on your preferred device.
 
-## 🚀 Getting Started
+## State Management
+This project uses **Cubit / Bloc** pattern to keep business logic separate from the UI layer.
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   ```
-2. **Install dependencies**:
-   ```bash
-   flutter pub get
-   ```
-3. **Run the app**:
-   ```bash
-   flutter run
-   ```
-
-## 🛠 Tech Stack
-
-- **State Management**: Flutter Bloc (Cubit)
-- **Networking**: Dio
-- **Navigation**: GoRouter
-- **Design**: Vanilla CSS approach with ScreenUtil
-- **Image Handling**: Cached Network Image
+## Screenshots Check
+- [x] `SearchScreen` UI matches Figma.
+- [x] `ProfileScreen` UI matches Figma, and properly linked.
+- [x] `EditProfileScreen` matches Figma (includes image upload option).
+- [x] `ResetPassword` matches Figma (renamed to Update Password).

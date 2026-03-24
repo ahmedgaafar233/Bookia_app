@@ -8,7 +8,7 @@ class ApiConstants {
 
   // Home
   static const String sliders = '/sliders';
-  static const String bestSeller = '/products-best-seller';
+  static const String bestSeller = '/products-bestseller';
 
   // Wishlist
   static const String wishlist = '/wishlist';
@@ -24,4 +24,21 @@ class ApiConstants {
   // Order
   static const String placeOrder = '/place-order';
   static const String governorates = '/governorates';
+
+  // Search
+  static const String searchProduct = '/products-search';
+
+  // Profile
+  static const String showProfile = '/profile';
+  static const String updateProfile = '/update-profile';
+  static const String editPassword = '/edit-password';
+  static const String logout = '/logout';
+
+  // Order
+  static const String orderHistory = '/order-history';
+
+  // Static Data
+  static const String settings = '/settings';
+  static const String faqs = '/faqs';
+  static const String contactUs = '/contact-us';
 }

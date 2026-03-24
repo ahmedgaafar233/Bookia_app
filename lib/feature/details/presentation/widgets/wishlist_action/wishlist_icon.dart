@@ -1,7 +1,6 @@
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
 import 'package:bookia/feature/details/presentation/widgets/wishlist_action/cubit/wishlist_action_cubit.dart';
-import 'package:bookia/feature/details/presentation/widgets/wishlist_action/cubit/wishlist_action_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,9 +15,9 @@ class WishlistIcon extends StatelessWidget {
     return BlocConsumer<WishlistActionCubit, WishlistActionState>(
       listener: (context, state) {
         if (state is WishlistActionSuccessState) {
-          showMyDialog(context, state.msg, type: DialogType.success);
+          showSuccessDialog(context, state.msg);
         } else if (state is WishlistActionErrorState) {
-          showMyDialog(context, state.msg, type: DialogType.error);
+          showErrorDialog(context, state.msg);
         }
       },
       builder: (context, state) {

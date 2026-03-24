@@ -20,8 +20,8 @@ class WishlistScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: const Padding(
-        padding: EdgeInsets.only(top: 20),
+      body: const SingleChildScrollView(
+        padding: EdgeInsets.only(top: 20, bottom: 20),
         child: WishlistBooks(),
       ),
     );

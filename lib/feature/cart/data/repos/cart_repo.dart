@@ -1,7 +1,6 @@
 import 'package:bookia/core/network/api_constants.dart';
 import 'package:bookia/core/network/dio_consumer.dart';
 import 'package:bookia/feature/cart/data/models/cart_response/cart_response.dart';
-import 'package:bookia/feature/cart/data/models/governorates_response/governorates_response.dart';
 
 class CartRepository {
   final DioConsumer dioConsumer;

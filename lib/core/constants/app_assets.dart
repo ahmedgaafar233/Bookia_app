@@ -1,5 +1,6 @@
 class AppAssets {
   static const String logo = 'assets/images/logo.png';
+  static const String logoSvg = 'assets/icons/logo_1.svg';
   static const String welcomeBg = 'assets/images/welcome_bg.png';
   static const String welcomeBgNew = 'assets/images/alif_caesar_rizqi_pratama_loulsoxl81c_unsplash_1.png';
   static const String backArrow = 'assets/icons/back_arrow.png';
@@ -26,4 +27,10 @@ class AppAssets {
   static const String homeSvg = 'assets/icons/home.svg';
   static const String categorySvg = 'assets/icons/category.svg';
   static const String profileSvg = 'assets/icons/profile.svg';
+  static const String logoutSvg = 'assets/icons/logout.svg';
+
+  // Images
+  static const String congrats = 'assets/images/congrats.png';
+  static const String profilePng = 'assets/images/profile.png';
+  static const String updatePasswordPng = 'assets/images/update_password.png';
 }

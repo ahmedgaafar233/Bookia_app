@@ -1,4 +1,4 @@
-import 'package:bookia/feature/cart/data/models/cart_response_model.dart';
+import 'package:bookia/feature/cart/data/models/cart_response/cart_item.dart';
 import 'package:bookia/feature/home/data/models/product_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,6 +7,7 @@ class SharedPrefs {
 
   static const String kWishlist = 'wishlistIds';
   static const String kCart = 'cartIds';
+  static const String kToken = 'token';
 
   static Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
@@ -29,6 +30,10 @@ class SharedPrefs {
     return prefs.get(key);
   }
 
+  static Future<void> removeData(String key) async {
+    await prefs.remove(key);
+  }
+
   static void cacheWishlistIds(List<Product> items) {
     var ids = items.map((item) => item.id.toString()).toList();
     // Use the generic cache method
@@ -45,7 +50,7 @@ class SharedPrefs {
   }
 
   static void cacheCartIds(List<CartItem> items) {
-    var ids = items.map((item) => item.itemProductId.toString()).toList();
+    var ids = items.map((item) => item.itemProductId?.toString() ?? '').toList();
     cacheData(kCart, ids);
   }
 

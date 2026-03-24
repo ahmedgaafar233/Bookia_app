@@ -48,7 +48,7 @@ class CustomButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (prefixIcon != null) prefixIcon!,
+            ?prefixIcon,
             if (prefixIcon != null && text != null && text!.isNotEmpty) Gap(10.w),
             if (text != null && text!.isNotEmpty)
               Text(

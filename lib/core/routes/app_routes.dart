@@ -13,4 +13,12 @@ class AppRoutes {
   static const String wishlist = '/wishlist';
   static const String checkout = '/checkout';
   static const String checkoutSuccess = '/checkout-success';
+  static const String search = '/search';
+  static const String profile = '/profile';
+  static const String editProfile = '/edit-profile';
+  static const String resetPasswordPage = '/reset-password-page';
+  static const String myOrders = '/my-orders';
+  static const String faqs = '/faqs';
+  static const String contactUs = '/contact-us';
+  static const String privacyTerms = '/privacy-terms';
 }

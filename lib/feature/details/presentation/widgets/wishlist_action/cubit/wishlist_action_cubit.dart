@@ -16,19 +16,11 @@ class WishlistActionCubit extends Cubit<WishlistActionState> {
     emit(WishlistActionLoadingState());
     try {
       if (isProductInWishlist(productId)) {
-        final response = await repository.removeFromWishlist(productId: productId);
-        if (response.status != null && response.status! >= 200 && response.status! < 300) {
-          emit(WishlistActionSuccessState('Removed from wishlist'));
-        } else {
-          emit(WishlistActionErrorState('Failed to remove from wishlist'));
-        }
+        await repository.removeFromWishlist(productId: productId);
+        emit(WishlistActionSuccessState('Removed from wishlist'));
       } else {
-        final response = await repository.addToWishlist(productId: productId);
-        if (response.status != null && response.status! >= 200 && response.status! < 300) {
-          emit(WishlistActionSuccessState('Added to wishlist'));
-        } else {
-          emit(WishlistActionErrorState('Failed to add to wishlist'));
-        }
+        await repository.addToWishlist(productId: productId);
+        emit(WishlistActionSuccessState('Added to wishlist'));
       }
     } catch (e) {
       emit(WishlistActionErrorState(e.toString()));

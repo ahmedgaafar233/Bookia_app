@@ -1,4 +1,4 @@
-import 'governorate_data.dart';
+import 'governorate.dart';
 
 class GovernoratesResponse {
   List<GovernorateData>? data;

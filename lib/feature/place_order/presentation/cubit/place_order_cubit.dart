@@ -1,5 +1,4 @@
 import 'package:bookia/feature/place_order/data/models/governorate.dart';
-import 'package:bookia/feature/place_order/data/models/governorates_response.dart';
 import 'package:bookia/feature/place_order/data/repository/place_order_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

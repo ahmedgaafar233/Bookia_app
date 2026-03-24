@@ -12,11 +12,18 @@ import 'package:bookia/feature/details/presentation/page/details_screen.dart';
 import 'package:bookia/feature/home/presentation/page/home_screen.dart';
 import 'package:bookia/feature/main/presentation/page/main_screen.dart';
 import 'package:bookia/feature/wishlist/presentation/page/wishlist_screen.dart';
-import 'package:bookia/feature/cart/presentation/page/cart_screen.dart';
 import 'package:bookia/feature/place_order/presentation/cubit/place_order_cubit.dart';
 import 'package:bookia/feature/place_order/data/repository/place_order_repo.dart';
 import 'package:bookia/feature/place_order/presentation/page/place_order_screen.dart';
 import 'package:bookia/feature/place_order/presentation/page/checkout_success_screen.dart';
+import 'package:bookia/feature/search/presentation/page/search_screen.dart';
+import 'package:bookia/feature/profile/presentation/page/profile_screen.dart';
+import 'package:bookia/feature/profile/presentation/page/edit_profile_screen.dart';
+import 'package:bookia/feature/profile/presentation/page/reset_password_screen.dart';
+import 'package:bookia/feature/profile/presentation/page/my_orders_screen.dart';
+import 'package:bookia/feature/settings/presentation/page/faq_screen.dart';
+import 'package:bookia/feature/settings/presentation/page/contact_us_screen.dart';
+import 'package:bookia/feature/settings/presentation/page/terms_screen.dart';
 import 'package:bookia/core/network/dio_consumer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -95,6 +102,38 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.checkoutSuccess,
         builder: (context, state) => const CheckoutSuccessScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.search,
+        builder: (context, state) => const SearchScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.profile,
+        builder: (context, state) => const ProfileScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.editProfile,
+        builder: (context, state) => const EditProfileScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.resetPasswordPage,
+        builder: (context, state) => const ResetPasswordScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.myOrders,
+        builder: (context, state) => const MyOrdersScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.faqs,
+        builder: (context, state) => const FaqScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.contactUs,
+        builder: (context, state) => const ContactUsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.privacyTerms,
+        builder: (context, state) => const PrivacyTermsScreen(),
       ),
     ],
   );

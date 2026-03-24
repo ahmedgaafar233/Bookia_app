@@ -1,6 +1,6 @@
 import 'package:bookia/core/services/local/shared_prefs.dart';
 import 'package:bookia/feature/cart/data/models/cart_response/cart_item.dart';
-import 'package:bookia/feature/cart/data/models/cart_response/data.dart';
+import 'package:bookia/feature/cart/data/models/cart_response/cart_response.dart';
 import 'package:bookia/feature/cart/data/repos/cart_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,19 +10,20 @@ class CartCubit extends Cubit<CartState> {
   final CartRepository cartRepository;
   CartCubit(this.cartRepository) : super(CartInitial());
 
-  Data? cartModel;
+  CartResponseModel? cartModel;
   List<CartItem> products = [];
   String total = '';
 
   Future<void> getCart() async {
     emit(GetCartLoading());
     try {
-      cartModel = await cartRepository.getCart(); // cartRepository.getCart() now returns Data
-      if (cartModel?.status != null &&
-          cartModel!.status! >= 200 &&
-          cartModel!.status! < 300) {
-        products = cartModel?.data?.cartItems ?? [];
-        total = cartModel?.data?.total.toString() ?? '';
+      final response = await cartRepository.getCart();
+      cartModel = response;
+      if (response.status != null &&
+          response.status! >= 200 &&
+          response.status! < 300) {
+        products = response.data?.cartItems ?? [];
+        total = response.data?.total?.toString() ?? '0';
         SharedPrefs.cacheCartIds(products);
         emit(GetCartSuccess());
       } else {

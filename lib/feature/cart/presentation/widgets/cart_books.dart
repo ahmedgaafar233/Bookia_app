@@ -1,15 +1,12 @@
-import 'package:bookia/core/functions/navigation.dart';
 import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
-import 'package:bookia/core/widgets/main_button.dart';
+import 'package:bookia/core/widgets/custom_button.dart';
+import 'package:go_router/go_router.dart';
 import 'package:bookia/feature/cart/presentation/cubit/cart_cubit.dart';
-import 'package:bookia/feature/cart/presentation/cubit/cart_state.dart';
 import 'package:bookia/feature/cart/presentation/widgets/cart_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 
 class CartBooks extends StatelessWidget {
   const CartBooks({super.key});
@@ -18,14 +15,15 @@ class CartBooks extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<CartCubit, CartState>(
       listener: (context, state) {
+        var cubit = context.read<CartCubit>();
         if (state is CheckoutLoadingState) {
           showLoadingDialog(context);
         } else if (state is CheckoutSuccessState) {
           Navigator.pop(context); // Close loading
-          pushTo(context, AppRoutes.checkout); // Updated to use AppRoutes
+          context.push(AppRoutes.checkout, extra: cubit.total); // Updated to use AppRoutes
         } else if (state is CheckoutErrorState) {
           Navigator.pop(context); // Close loading
-          showMyDialog(context, 'Failed to checkout. Please try again.');
+          showErrorDialog(context, 'Failed to checkout. Please try again.');
         }
       },
       builder: (context, state) {
@@ -49,13 +47,6 @@ class CartBooks extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return CartItemWidget(
                       item: cubit.products[index],
-                      onRemove: () {
-                        cubit.removeFromCart(cubit.products[index].itemId ?? 0);
-                      },
-                      onUpdate: (count) {
-                        cubit.updateCart(
-                            cubit.products[index].itemId ?? 0, count);
-                      },
                     );
                   },
                 ),
@@ -74,7 +65,7 @@ class CartBooks extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    MainButton(
+                    CustomButton(
                       text: 'Checkout',
                       onPressed: () {
                         cubit.checkout();

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bookia/feature/wishlist/presentation/cubit/wishlist_cubit.dart';
 
 class BookCard extends StatelessWidget {
   final Product product;
@@ -92,8 +94,10 @@ class BookCard extends StatelessWidget {
                 const Spacer(),
                 if (isWishlist)
                   IconButton(
-                    onPressed: onRefresh,
-                    icon: const Icon(Icons.delete, color: Colors.red),
+                    onPressed: () {
+                      context.read<WishlistCubit>().removeFromWishlist(productId: product.id ?? 0);
+                    },
+                    icon: const Icon(Icons.cancel_outlined, color: AppColors.secondaryColor),
                   )
                 else
                   ElevatedButton(

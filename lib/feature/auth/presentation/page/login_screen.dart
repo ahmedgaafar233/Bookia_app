@@ -148,59 +148,22 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                           ),
                     Gap(35.h),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: Divider(
-                                color: AppColors.borderColor, thickness: 1)),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10.w),
-                          child: Text('Or Login with',
-                              style: TextStyle(
-                                  color: AppColors.darkGrey, fontSize: 14.sp)),
-                        ),
-                        Expanded(
-                            child: Divider(
-                                color: AppColors.borderColor, thickness: 1)),
-                      ],
+                    CustomButton(
+                      text: 'Sign in with Google',
+                      onPressed: () {},
+                      color: AppColors.white,
+                      textColor: AppColors.secondaryColor,
+                      borderColor: AppColors.borderColor,
+                      prefixIcon: SvgPicture.asset(AppAssets.googleIc, width: 24.w),
                     ),
-                    Gap(22.h),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomButton(
-                            onPressed: () {},
-                            color: AppColors.white,
-                            textColor: AppColors.secondaryColor,
-                            borderColor: AppColors.borderColor,
-                            prefixIcon: SvgPicture.asset(AppAssets.googleIc,
-                                width: 24.w),
-                          ),
-                        ),
-                        Gap(8.w),
-                        Expanded(
-                          child: CustomButton(
-                            onPressed: () {},
-                            color: AppColors.white,
-                            textColor: AppColors.secondaryColor,
-                            borderColor: AppColors.borderColor,
-                            prefixIcon: SvgPicture.asset(AppAssets.appleIc,
-                                width: 24.w),
-                          ),
-                        ),
-                        Gap(8.w),
-                        Expanded(
-                          child: CustomButton(
-                            onPressed: () {},
-                            color: AppColors.white,
-                            textColor: AppColors.secondaryColor,
-                            borderColor: AppColors.borderColor,
-                            prefixIcon: SvgPicture.asset(
-                                AppAssets.facebookIcon,
-                                width: 24.w),
-                          ),
-                        ),
-                      ],
+                    Gap(16.h),
+                    CustomButton(
+                      text: 'Sign in with Apple',
+                      onPressed: () {},
+                      color: AppColors.white,
+                      textColor: AppColors.secondaryColor,
+                      borderColor: AppColors.borderColor,
+                      prefixIcon: SvgPicture.asset(AppAssets.appleIc, width: 24.w),
                     ),
                     Gap(50.h),
                     Row(

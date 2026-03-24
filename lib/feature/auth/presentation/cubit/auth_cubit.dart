@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bookia/feature/auth/data/repos/auth_repository.dart';
 
+import 'package:bookia/core/services/local/shared_prefs.dart';
+
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -14,12 +16,22 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final response = await authRepository.login(email: email, password: password);
       if (response.status != null && response.status! >= 200 && response.status! < 300) {
+        if (response.data?.token != null) {
+          await SharedPrefs.cacheData(SharedPrefs.kToken, response.data!.token);
+        }
         emit(AuthSuccess(response));
       } else {
         emit(AuthError(response.message ?? 'Login Failed'));
       }
     } on DioException catch (e) {
-      final message = e.response?.data['message'] ?? 'Login Failed';
+      String message = e.response?.data['message'] ?? 'Login Failed';
+      if (e.response?.data['errors'] != null) {
+        final errors = e.response?.data['errors'] as Map<String, dynamic>;
+        message = errors.values.map((v) {
+          if (v is List) return v.join('\n');
+          return v.toString();
+        }).join('\n');
+      }
       emit(AuthError(message));
     } catch (e) {
       emit(AuthError(e.toString()));
@@ -46,7 +58,14 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthError(response.message ?? 'Registration Failed'));
       }
     } on DioException catch (e) {
-      final message = e.response?.data['message'] ?? 'Registration Failed';
+      String message = e.response?.data['message'] ?? 'Registration Failed';
+      if (e.response?.data['errors'] != null) {
+        final errors = e.response?.data['errors'] as Map<String, dynamic>;
+        message = errors.values.map((v) {
+          if (v is List) return v.join('\n');
+          return v.toString();
+        }).join('\n');
+      }
       emit(AuthError(message));
     } catch (e) {
       emit(AuthError(e.toString()));
@@ -97,6 +116,21 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthSuccess(LoginResponseModel(message: 'Password reset', status: 200)));
       } else {
         emit(AuthError('Reset failed'));
+      }
+    } catch (e) {
+      emit(AuthError(e.toString()));
+    }
+  }
+
+  Future<void> logout() async {
+    emit(AuthLoading());
+    try {
+      final success = await authRepository.logout();
+      if (success) {
+        await SharedPrefs.removeData(SharedPrefs.kToken);
+        emit(AuthSuccess(LoginResponseModel(message: 'Logout successful', status: 200)));
+      } else {
+        emit(AuthError('Logout failed'));
       }
     } catch (e) {
       emit(AuthError(e.toString()));

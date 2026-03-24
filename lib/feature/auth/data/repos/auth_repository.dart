@@ -82,4 +82,11 @@ class AuthRepository {
         response.statusCode! >= 200 &&
         response.statusCode! < 300;
   }
+
+  Future<bool> logout() async {
+    final response = await dioConsumer.post(ApiConstants.logout);
+    return response.statusCode != null &&
+        response.statusCode! >= 200 &&
+        response.statusCode! < 300;
+  }
 }

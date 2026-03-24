@@ -15,12 +15,15 @@ class ProductResponseModel {
 class ProductData {
   List<Product>? products;
 
-  ProductData({this.products});
-
   ProductData.fromJson(Map<String, dynamic> json) {
     if (json['products'] != null) {
       products = <Product>[];
       json['products'].forEach((v) {
+        products!.add(Product.fromJson(v));
+      });
+    } else if (json['data'] != null && json['data'] is List) {
+      products = <Product>[];
+      json['data'].forEach((v) {
         products!.add(Product.fromJson(v));
       });
     }
@@ -33,6 +36,7 @@ class Product {
   String? description;
   String? price;
   String? discount;
+  String? priceAfterDiscount;
   String? image;
   int? categoryId;
 
@@ -42,6 +46,7 @@ class Product {
     this.description,
     this.price,
     this.discount,
+    this.priceAfterDiscount,
     this.image,
     this.categoryId,
   });
@@ -51,7 +56,8 @@ class Product {
     name = json['name'];
     description = json['description'];
     price = json['price'];
-    discount = json['discount'];
+    discount = json['discount'].toString();
+    priceAfterDiscount = json['price_after_discount'].toString();
     image = json['image'];
     categoryId = json['category_id'];
   }

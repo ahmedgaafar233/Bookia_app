@@ -3,6 +3,7 @@ import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -30,8 +31,8 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   const Spacer(flex: 3),
                   // Logo
-                  Image.asset(
-                    AppAssets.logo,
+                  SvgPicture.asset(
+                    AppAssets.logoSvg,
                     width: 210.w,
                     height: 66.h,
                   ),

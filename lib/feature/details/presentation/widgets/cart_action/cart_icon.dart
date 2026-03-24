@@ -1,8 +1,7 @@
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/widgets/dialogs.dart';
-import 'package:bookia/core/widgets/main_button.dart';
+import 'package:bookia/core/widgets/custom_button.dart';
 import 'package:bookia/feature/details/presentation/widgets/cart_action/cubit/cart_action_cubit.dart';
-import 'package:bookia/feature/details/presentation/widgets/cart_action/cubit/cart_action_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,10 +17,10 @@ class CartIcon extends StatelessWidget {
       listener: (context, state) {
         if (state is CartActionSuccessState) {
           Navigator.pop(context); // Close loading
-          showMyDialog(context, state.msg, type: DialogType.success);
+          showSuccessDialog(context, state.msg);
         } else if (state is CartActionErrorState) {
           Navigator.pop(context); // Close loading
-          showMyDialog(context, state.msg, type: DialogType.error);
+          showErrorDialog(context, state.msg);
         } else if (state is CartActionLoadingState) {
           showLoadingDialog(context);
         }
@@ -29,9 +28,9 @@ class CartIcon extends StatelessWidget {
       builder: (context, state) {
         var cubit = context.read<CartActionCubit>();
         bool isInCart = cubit.isProductInCart(id);
-        return MainButton(
-          bgColor: isInCart ? AppColors.primaryColor : AppColors.darkColor,
-          minWidth: 200,
+        return CustomButton(
+          color: isInCart ? AppColors.primaryColor : AppColors.secondaryColor,
+          width: 200.w,
           text: isInCart ? 'Added to cart' : 'Add to cart',
           onPressed: () {
             if (!isInCart) {

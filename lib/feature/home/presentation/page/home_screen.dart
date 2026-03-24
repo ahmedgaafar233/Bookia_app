@@ -1,4 +1,5 @@
 import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/network/dio_consumer.dart';
 import 'package:bookia/feature/home/data/repos/home_repo.dart';
 import 'package:bookia/feature/home/presentation/cubit/home_cubit.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -28,7 +30,9 @@ class HomeScreen extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.push(AppRoutes.search);
+              },
               icon: SvgPicture.asset(AppAssets.searchNormal),
             ),
             Gap(10.w),

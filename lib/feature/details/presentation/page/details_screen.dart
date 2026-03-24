@@ -78,12 +78,12 @@ class DetailsScreen extends StatelessWidget {
               ),
               const Gap(10),
               Text(
-                product.category ?? '',
+                '',
                 style: TextStyles.body.copyWith(color: AppColors.primaryColor),
               ),
               const Gap(20),
               Text(
-                product.description ?? '',
+                (product.description ?? '').replaceAll(RegExp(r'<[^>]*>|&[^;]+;'), ''),
                 style: TextStyles.body.copyWith(color: Colors.grey),
                 textAlign: TextAlign.justify,
               ),
@@ -94,9 +94,26 @@ class DetailsScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Row(
             children: [
-              Text(
-                '${product.price} \$',
-                style: TextStyles.title.copyWith(fontSize: 20),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (product.priceAfterDiscount != null &&
+                      product.priceAfterDiscount != product.price &&
+                      product.priceAfterDiscount != 'null')
+                    Text(
+                      '${product.price} \$',
+                      style: TextStyles.body.copyWith(
+                        fontSize: 14.sp,
+                        color: Colors.grey,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                  Text(
+                    '${(product.priceAfterDiscount != null && product.priceAfterDiscount != 'null') ? product.priceAfterDiscount : product.price} \$',
+                    style: TextStyles.title.copyWith(fontSize: 20.sp),
+                  ),
+                ],
               ),
               const Spacer(),
               CartIcon(id: product.id ?? 0),

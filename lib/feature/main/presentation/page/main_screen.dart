@@ -6,6 +6,7 @@ import 'package:bookia/feature/wishlist/data/repos/wishlist_repo.dart';
 import 'package:bookia/feature/wishlist/presentation/cubit/wishlist_cubit.dart';
 import 'package:bookia/feature/wishlist/presentation/page/wishlist_screen.dart';
 import 'package:bookia/feature/cart/presentation/page/cart_screen.dart';
+import 'package:bookia/feature/profile/presentation/page/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const WishlistScreen(),
     const CartScreen(),
-    const Center(child: Text('Profile')),
+    const ProfileScreen(),
   ];
 
   @override

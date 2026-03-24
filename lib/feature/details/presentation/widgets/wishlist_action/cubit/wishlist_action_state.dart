@@ -1,3 +1,5 @@
+part of 'wishlist_action_cubit.dart';
+
 abstract class WishlistActionState {}
 
 class WishlistActionInitial extends WishlistActionState {}
