@@ -17,22 +17,22 @@ Welcome to **Bookia**, a fully-featured, beautifully designed cross-platform boo
 ## 📸 Screenshots (Full Flow)
 
 <p align="center">
-  <img src="docs/screenshots/final_1.png" width="180" style="margin: 5px;" alt="Splash">
-  <img src="docs/screenshots/final_2.png" width="180" style="margin: 5px;" alt="Welcome">
-  <img src="docs/screenshots/final_4.png" width="180" style="margin: 5px;" alt="Login">
-  <img src="docs/screenshots/final_6.png" width="180" style="margin: 5px;" alt="Register">
+  <img src="docs/screenshots/final_1.jpg" width="180" style="margin: 5px;" alt="Splash">
+  <img src="docs/screenshots/final_2.jpg" width="180" style="margin: 5px;" alt="Welcome">
+  <img src="docs/screenshots/final_3.jpg" width="180" style="margin: 5px;" alt="Auth">
+  <img src="docs/screenshots/final_4.jpg" width="180" style="margin: 5px;" alt="Home">
 </p>
 <p align="center">
-  <img src="docs/screenshots/final_8.png" width="180" style="margin: 5px;" alt="Home">
-  <img src="docs/screenshots/final_10.png" width="180" style="margin: 5px;" alt="Book Details">
-  <img src="docs/screenshots/final_12.png" width="180" style="margin: 5px;" alt="Search">
-  <img src="docs/screenshots/final_14.png" width="180" style="margin: 5px;" alt="Cart">
+  <img src="docs/screenshots/final_5.jpg" width="180" style="margin: 5px;" alt="Details">
+  <img src="docs/screenshots/final_6.jpg" width="180" style="margin: 5px;" alt="Review">
+  <img src="docs/screenshots/final_7.jpg" width="180" style="margin: 5px;" alt="Search">
+  <img src="docs/screenshots/final_8.jpg" width="180" style="margin: 5px;" alt="Orders">
 </p>
 <p align="center">
-  <img src="docs/screenshots/final_16.png" width="180" style="margin: 5px;" alt="Checkout">
-  <img src="docs/screenshots/final_18.png" width="180" style="margin: 5px;" alt="Success">
-  <img src="docs/screenshots/final_20.png" width="180" style="margin: 5px;" alt="Profile">
-  <img src="docs/screenshots/final_22.png" width="180" style="margin: 5px;" alt="Settings">
+  <img src="docs/screenshots/final_9.jpg" width="180" style="margin: 5px;" alt="Cart">
+  <img src="docs/screenshots/final_10.jpg" width="180" style="margin: 5px;" alt="Checkout">
+  <img src="docs/screenshots/final_11.jpg" width="180" style="margin: 5px;" alt="Profile">
+  <img src="docs/screenshots/final_12.jpg" width="180" style="margin: 5px;" alt="Settings">
 </p>
 
 ## 🚀 Download & Run
