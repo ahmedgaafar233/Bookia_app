@@ -3,6 +3,7 @@ import 'package:bookia/core/network/dio_consumer.dart';
 import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/utils/app_colors.dart';
+import 'package:bookia/core/widgets/custom_button.dart';
 import 'package:bookia/feature/profile/data/repos/profile_repo.dart';
 import 'package:bookia/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:bookia/feature/profile/presentation/cubit/profile_state.dart';
@@ -20,15 +21,20 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProfileCubit(ProfileRepository(DioConsumer()))..getProfile(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ProfileCubit(ProfileRepository(DioConsumer()))..getProfile(),
+        ),
+        BlocProvider(
+          create: (context) => AuthCubit(AuthRepository(DioConsumer())),
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: Text('Profile', style: TextStyles.title),
           actions: [
-            BlocProvider(
-              create: (context) => AuthCubit(AuthRepository(DioConsumer())),
-              child: BlocConsumer<AuthCubit, AuthState>(
+            BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
                   if (state is AuthSuccess) {
                     context.go(AppRoutes.welcome);
@@ -51,7 +57,6 @@ class ProfileScreen extends StatelessWidget {
                   );
                 },
               ),
-            ),
             Gap(10.w),
           ],
         ),
@@ -116,7 +121,22 @@ class ProfileScreen extends StatelessWidget {
                 ),
               );
             } else {
-              return const Center(child: Text('Failed to load profile.'));
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Session expired. Please log in again.', style: TextStyles.body),
+                    Gap(20.h),
+                    CustomButton(
+                      text: 'Login Again',
+                      width: 200.w,
+                      onPressed: () {
+                        context.read<AuthCubit>().logout();
+                      },
+                    ),
+                  ],
+                ),
+              );
             }
           },
         ),

@@ -17,12 +17,12 @@ class GovernorateBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
+      height: 450, // Added fixed height to prevent expanded layout errors and keep it half-screen
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           const Gap(16),
           Text('Select Governorate', style: TextStyles.title),

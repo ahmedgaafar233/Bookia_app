@@ -23,12 +23,17 @@ class WishlistIcon extends StatelessWidget {
       builder: (context, state) {
         var cubit = context.read<WishlistActionCubit>();
         bool isWishlisted = cubit.isProductInWishlist(productId);
-        return IconButton(
-          onPressed: () => cubit.toggleWishlist(productId),
-          icon: Icon(
-            isWishlisted ? Icons.bookmark : Icons.bookmark_border_outlined,
-            color: isWishlisted ? AppColors.primaryColor : AppColors.secondaryColor,
-            size: 24.sp,
+        return CircleAvatar(
+          radius: 18.r,
+          backgroundColor: Colors.white,
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: () => cubit.toggleWishlist(productId),
+            icon: Icon(
+              isWishlisted ? Icons.bookmark : Icons.bookmark_border_outlined,
+              color: isWishlisted ? AppColors.primaryColor : AppColors.secondaryColor,
+              size: 20.sp,
+            ),
           ),
         );
       },

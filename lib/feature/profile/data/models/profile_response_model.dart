@@ -1,26 +1,22 @@
 class ProfileResponseModel {
   int? status;
   String? message;
-  ProfileData? data;
+  User? data;
 
   ProfileResponseModel({this.status, this.message, this.data});
 
   ProfileResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? ProfileData.fromJson(json['data']) : null;
+    if (json['data'] != null && json['data'] is Map<String, dynamic>) {
+      data = User.fromJson(json['data']);
+    } else {
+      data = null;
+    }
   }
 }
 
-class ProfileData {
-  User? user;
-
-  ProfileData({this.user});
-
-  ProfileData.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-  }
-}
+// ProfileData removed as it's redundant
 
 class User {
   int? id;

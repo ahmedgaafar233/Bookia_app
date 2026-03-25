@@ -9,6 +9,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bookia/feature/wishlist/presentation/cubit/wishlist_cubit.dart';
+import 'package:bookia/feature/details/presentation/widgets/cart_action/cubit/cart_action_cubit.dart';
 
 class BookCard extends StatelessWidget {
   final Product product;
@@ -84,7 +85,7 @@ class BookCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '${product.price} EGP',
+                  '\$${product.price}',
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
@@ -100,18 +101,35 @@ class BookCard extends StatelessWidget {
                     icon: const Icon(Icons.cancel_outlined, color: AppColors.secondaryColor),
                   )
                 else
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.secondaryColor,
-                      foregroundColor: Colors.white,
-                      minimumSize: Size(60.w, 30.h),
-                      padding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.r),
-                      ),
-                    ),
-                    child: Text('Buy', style: TextStyle(fontSize: 12.sp)),
+                  BlocConsumer<CartActionCubit, CartActionState>(
+                    listener: (context, state) {
+                      if (state is CartActionSuccessState) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(state.msg), duration: const Duration(seconds: 1)),
+                        );
+                      } else if (state is CartActionErrorState) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(state.msg), duration: const Duration(seconds: 1)),
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          context.read<CartActionCubit>().addToCart(product.id ?? 0);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.secondaryColor,
+                          foregroundColor: Colors.white,
+                          minimumSize: Size(60.w, 30.h),
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.r),
+                          ),
+                        ),
+                        child: Text('Buy', style: TextStyle(fontSize: 12.sp)),
+                      );
+                    },
                   ),
               ],
             ),

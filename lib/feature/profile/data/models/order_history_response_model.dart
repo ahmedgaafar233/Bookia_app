@@ -8,7 +8,11 @@ class OrderHistoryResponseModel {
   OrderHistoryResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? OrderData.fromJson(json['data']) : null;
+    if (json['data'] != null && json['data'] is Map<String, dynamic>) {
+      data = OrderData.fromJson(json['data']);
+    } else {
+      data = null;
+    }
   }
 }
 

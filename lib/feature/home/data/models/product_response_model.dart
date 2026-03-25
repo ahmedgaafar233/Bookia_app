@@ -8,7 +8,11 @@ class ProductResponseModel {
   ProductResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? ProductData.fromJson(json['data']) : null;
+    if (json['data'] != null && json['data'] is Map<String, dynamic>) {
+      data = ProductData.fromJson(json['data']);
+    } else {
+      data = null;
+    }
   }
 }
 

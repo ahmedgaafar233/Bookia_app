@@ -68,7 +68,7 @@ class CartItemWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${item.itemProductPriceAfterDiscount} EGP',
+                        '\$${item.itemProductPriceAfterDiscount}',
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,

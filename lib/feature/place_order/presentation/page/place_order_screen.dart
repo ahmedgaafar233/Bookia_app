@@ -50,7 +50,6 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
     if (cubit.governorates.isNotEmpty) {
       showModalBottomSheet(
         context: context,
-        isScrollControlled: true,
         backgroundColor: Colors.transparent,
         builder: (context) => GovernorateBottomSheet(
           governorates: cubit.governorates,

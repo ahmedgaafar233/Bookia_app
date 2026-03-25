@@ -1,10 +1,11 @@
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/services/local/shared_prefs.dart';
 import 'package:bookia/core/utils/app_colors.dart';
-import 'package:bookia/feature/wishlist/presentation/cubit/wishlist_cubit.dart';
+import 'package:bookia/feature/details/presentation/widgets/wishlist_action/cubit/wishlist_action_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WishlistIcon extends StatelessWidget {
   final int productId;
@@ -13,31 +14,26 @@ class WishlistIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WishlistCubit, WishlistState>(
-      buildWhen: (previous, current) =>
-          current is GetWishlistSuccess ||
-          current is AddToWishlistSuccess ||
-          current is RemoveFromWishlistSuccess,
+    return BlocBuilder<WishlistActionCubit, WishlistActionState>(
       builder: (context, state) {
-        bool isInWishlist = SharedPrefs.getWishlistIds()
-            .contains(productId);
-        return GestureDetector(
-          onTap: () {
-            if (isInWishlist) {
-              context.read<WishlistCubit>().removeFromWishlist(
-                  productId: productId);
-            } else {
-              context.read<WishlistCubit>().addToWishlist(
-                  productId: productId);
-            }
-          },
-          child: SvgPicture.asset(
-            AppAssets.bookmarkSvg,
-            colorFilter: ColorFilter.mode(
-              isInWishlist
-                  ? AppColors.primaryColor
-                  : color ?? AppColors.white,
-              BlendMode.srcIn,
+        var cubit = context.read<WishlistActionCubit>();
+        bool isInWishlist = cubit.isProductInWishlist(productId);
+        
+        return CircleAvatar(
+          radius: 16.r,
+          backgroundColor: Colors.white,
+          child: GestureDetector(
+            onTap: () {
+              cubit.toggleWishlist(productId);
+            },
+            child: SvgPicture.asset(
+              AppAssets.bookmarkSvg,
+              width: 16.w,
+              height: 16.h,
+              colorFilter: ColorFilter.mode(
+                isInWishlist ? AppColors.primaryColor : AppColors.secondaryColor,
+                BlendMode.srcIn,
+              ),
             ),
           ),
         );

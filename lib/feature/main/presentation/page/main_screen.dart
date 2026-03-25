@@ -33,11 +33,19 @@ class _MainScreenState extends State<MainScreen> {
     return BlocProvider(
       create: (context) =>
           WishlistCubit(WishlistRepository(DioConsumer()))..getWishlist(),
-      child: Scaffold(
-        body: _screens[_selectedIndex],
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            body: _screens[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex,
           onTap: (index) {
+            if (index == 1) {
+              context.read<WishlistCubit>().getWishlist();
+            } else if (index == 2) {
+              // Might need context.read<CartCubit>().getCart(); but wait, CartCubit is not provided in MainScreen!
+              // Is CartCubit provided globally or inside CartScreen? Let's be careful.
+            }
             setState(() {
               _selectedIndex = index;
             });
@@ -98,7 +106,8 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ],
         ),
-      ),
+      );
+    }),
     );
   }
 }

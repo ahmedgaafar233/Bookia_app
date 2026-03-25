@@ -1,37 +1,43 @@
-# Bookia Store
+# 📚 Bookia - The Premium Bookstore App
 
-A Flutter e-commerce application for booking and buying books. It integrates with a RESTful API and uses Cubit/Bloc for state management.
+<div align="center">
+  <img src="docs/screenshots/demo.gif" width="250" alt="Bookia Demo Video">
+</div>
 
-## Features
-- **Authentication**: Login, Register, Forgot Password, and complete user sessions.
-- **Home & Search**: Browse bestsellers, sliders, and search for books.
-- **Wishlist & Cart**: Add products to your wishlist or cart from anywhere in the app.
-- **Checkout**: Full checkout flow with governorate selection and place order logic.
-- **Profile**: Manage your profile, view orders, update password, and access Settings (FAQ, Contact Us, Privacy).
+Welcome to **Bookia**, a fully-featured, beautifully designed cross-platform bookstore application built with Flutter.
 
-## Screenshots
-*(Add your screenshots here)*
-- [x] Home Screen
-- [x] Search Screen
-- [x] Book Details
-- [x] Cart
-- [x] Profile & Settings
-- [x] Contact Us
+## 🌟 Features
+- **Pristine UI/UX:** Faithfully implements the gorgeous Figma design, utilizing `flutter_screenutil` for pixel-perfect responsiveness.
+- **Dynamic API Integration:** Communicates with remote backends seamlessly using `Dio` with robust generic error handling.
+- **Global State Management:** Features synchronized cart and wishlist state via `Cubit` (Bloc pattern) ensuring badges and icons update globally across all screens in an instant.
+- **Cached Authentication:** Built-in Token and Session caching. The Splash screen dynamically routes the user, skipping the Welcome loop if already verified.
+- **Adaptive Launcher Icons:** Automatically adopts iOS and Android native radius restrictions with high-quality adaptive background rendering.
 
-## Video Walkthrough
-*(Embed a video or add a link to a walkthrough of the app here)*
+## 📸 Screenshots
 
-## How to Run
-1. Make sure Flutter is installed.
-2. Clone the repository.
-3. Run `flutter pub get`.
-4. Run `flutter run` on your preferred device.
+<p align="center">
+  <img src="docs/screenshots/final_1.png" width="200" style="margin: 5px;" alt="Splash">
+  <img src="docs/screenshots/final_2.png" width="200" style="margin: 5px;" alt="Welcome">
+  <img src="docs/screenshots/final_4.png" width="200" style="margin: 5px;" alt="Home Screen">
+  <img src="docs/screenshots/final_6.png" width="200" style="margin: 5px;" alt="Search Screen">
+  <img src="docs/screenshots/final_7.png" width="200" style="margin: 5px;" alt="Cart Screen">
+  <img src="docs/screenshots/final_8.png" width="200" style="margin: 5px;" alt="Profile Screen">
+</p>
 
-## State Management
-This project uses **Cubit / Bloc** pattern to keep business logic separate from the UI layer.
+## 🚀 Release Information
+A highly optimized, tree-shaken Release APK has been fully built.
 
-## Screenshots Check
-- [x] `SearchScreen` UI matches Figma.
-- [x] `ProfileScreen` UI matches Figma, and properly linked.
-- [x] `EditProfileScreen` matches Figma (includes image upload option).
-- [x] `ResetPassword` matches Figma (renamed to Update Password).
+**Download the Release APK:**
+👉 `build/app/outputs/flutter-apk/app-release.apk`
+
+---
+
+## 👨‍💻 Credits & Acknowledgments
+This project was conceptualized and developed by **Ahmed Gaafar**, proudly sponsored and supported by **EraaSoft**.
+
+I would like to express my sincere gratitude and appreciation to my instructors for their invaluable guidance and support:
+- **Eng. Sayed Abdul-Aziz**: For the high-quality teaching, guidance, and the foundational knowledge shared throughout the development.
+- **Eng. Abdalrahman Nasser**: For the constant supervision, follow-up, and technical oversight that helped me achieve this "perfect" result.
+
+---
+*Built with ❤️ in Flutter.*

@@ -1,7 +1,10 @@
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/routes/app_routes.dart';
+import 'package:bookia/core/services/local/shared_prefs.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +20,12 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
-        context.pushReplacement(AppRoutes.welcome);
+        String? token = SharedPrefs.getData(SharedPrefs.kToken) as String?;
+        if (token != null && token.isNotEmpty) {
+          context.pushReplacement(AppRoutes.main);
+        } else {
+          context.pushReplacement(AppRoutes.welcome);
+        }
       }
     });
   }
@@ -30,34 +38,9 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Placeholder for Logo
-            Image.asset(
-              AppAssets.logo,
-              width: 150,
-              errorBuilder: (context, error, stackTrace) {
-                return const Icon(
-                  Icons.book_rounded,
-                  size: 100,
-                  color: AppColors.secondaryColor,
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'Bookia',
-              style: TextStyle(
-                fontSize: 35,
-                fontWeight: FontWeight.bold,
-                color: AppColors.secondaryColor,
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Order Your Book Now!',
-              style: TextStyle(
-                fontSize: 18,
-                color: AppColors.darkGrey,
-              ),
+            SvgPicture.asset(
+              AppAssets.logoSvg,
+              width: 250.w,
             ),
           ],
         ),

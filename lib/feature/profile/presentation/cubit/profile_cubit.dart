@@ -1,5 +1,6 @@
 import 'package:bookia/feature/profile/data/repos/profile_repo.dart';
 import 'package:bookia/feature/profile/presentation/cubit/profile_state.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
@@ -11,8 +12,8 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(GetProfileLoading());
     try {
       final response = await _profileRepository.getProfile();
-      if (response.status == 200 && response.data?.user != null) {
-        emit(GetProfileSuccess(response.data!.user!));
+      if (response.status == 200 && response.data != null) {
+        emit(GetProfileSuccess(response.data!));
       } else {
         emit(GetProfileError());
       }
@@ -75,6 +76,18 @@ class ProfileCubit extends Cubit<ProfileState> {
       } else {
         emit(ResetPasswordError('Reset password failed'));
       }
+    } on DioException catch (e) {
+      String errorMsg = 'An error occurred';
+      if (e.response?.data != null && e.response?.data['message'] != null) {
+        errorMsg = e.response?.data['message'];
+        if (e.response?.data['errors'] != null && e.response!.data['errors'] is Map) {
+          final errors = e.response!.data['errors'] as Map;
+          if (errors.isNotEmpty) {
+            errorMsg = errors.values.first[0].toString();
+          }
+        }
+      }
+      emit(ResetPasswordError(errorMsg));
     } catch (e) {
       emit(ResetPasswordError('An error occurred'));
     }
