@@ -1,13 +1,13 @@
 import 'package:bookia/core/services/local/shared_prefs.dart';
 import 'package:bookia/feature/cart/data/models/cart_response/cart_item.dart';
 import 'package:bookia/feature/cart/data/models/cart_response/cart_response.dart';
-import 'package:bookia/feature/cart/data/repos/cart_repo.dart';
+import 'package:bookia/feature/cart/domain/repos/base_cart_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  final CartRepository cartRepository;
+  final BaseCartRepo cartRepository;
   CartCubit(this.cartRepository) : super(CartInitial());
 
   CartResponseModel? cartModel;

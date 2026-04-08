@@ -1,8 +1,8 @@
 import 'package:bookia/core/constants/app_assets.dart';
+import 'package:bookia/core/di/service_locator.dart';
 import 'package:bookia/core/utils/app_colors.dart';
-import 'package:bookia/core/network/dio_consumer.dart';
 import 'package:bookia/feature/home/presentation/page/home_screen.dart';
-import 'package:bookia/feature/wishlist/data/repos/wishlist_repo.dart';
+import 'package:bookia/feature/wishlist/domain/repos/base_wishlist_repo.dart';
 import 'package:bookia/feature/wishlist/presentation/cubit/wishlist_cubit.dart';
 import 'package:bookia/feature/wishlist/presentation/page/wishlist_screen.dart';
 import 'package:bookia/feature/cart/presentation/page/cart_screen.dart';
@@ -32,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          WishlistCubit(WishlistRepository(DioConsumer()))..getWishlist(),
+          WishlistCubit(sl<BaseWishlistRepo>())..getWishlist(),
       child: Builder(
         builder: (context) {
           return Scaffold(

@@ -1,8 +1,9 @@
+import 'package:bookia/core/di/service_locator.dart';
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/functions/navigation.dart';
-import 'package:bookia/core/network/dio_consumer.dart';
+
 import 'package:bookia/core/styles/text_styles.dart';
-import 'package:bookia/feature/settings/data/repos/settings_repo.dart';
+
 import 'package:bookia/feature/settings/presentation/cubit/settings_cubit.dart';
 import 'package:bookia/feature/settings/presentation/cubit/settings_state.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class FaqScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SettingsCubit(SettingsRepository(DioConsumer()))..getFaqs(),
+      create: (context) => sl<SettingsCubit>()..getFaqs(),
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(

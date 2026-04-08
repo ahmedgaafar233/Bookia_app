@@ -1,0 +1,120 @@
+{
+  "app_name": "Bookia",
+
+  "general": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ ما",
+    "retry": "إعادة المحاولة",
+    "ok": "موافق",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "back": "رجوع",
+    "submit": "إرسال",
+    "success": "نجح",
+    "no_internet": "لا يوجد اتصال بالإنترنت",
+    "server_error": "خطأ في السيرفر، يرجى المحاولة مرة أخرى"
+  },
+
+  "auth": {
+    "welcome": "مرحباً بك في Bookia",
+    "welcome_subtitle": "متجرك الإلكتروني للكتب",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirm_password": "تأكيد كلمة المرور",
+    "name": "الاسم الكامل",
+    "forgot_password": "نسيت كلمة المرور؟",
+    "have_account": "لديك حساب بالفعل؟ ",
+    "no_account": "ليس لديك حساب؟ ",
+    "otp_title": "التحقق من الرمز",
+    "otp_subtitle": "أدخل الرمز المرسل إلى بريدك الإلكتروني",
+    "create_new_password": "إنشاء كلمة مرور جديدة",
+    "password_changed": "تم تغيير كلمة المرور بنجاح",
+    "password_changed_subtitle": "تم إعادة تعيين كلمة المرور بنجاح",
+    "reset_password": "إعادة تعيين كلمة المرور",
+    "login_success": "تم تسجيل الدخول بنجاح",
+    "register_success": "تم إنشاء الحساب بنجاح",
+    "logout_success": "تم تسجيل الخروج بنجاح"
+  },
+
+  "home": {
+    "title": "الرئيسية",
+    "best_seller": "الأعلى مبيعاً",
+    "discover": "اكتشف الكتب",
+    "see_all": "عرض الكل"
+  },
+
+  "search": {
+    "title": "بحث",
+    "hint": "ابحث عن كتاب...",
+    "no_results": "لا توجد كتب",
+    "start_search": "ابدأ في البحث عن كتبك المفضلة!"
+  },
+
+  "cart": {
+    "title": "سلة الشراء",
+    "empty": "سلة الشراء فارغة",
+    "total": "الإجمالي",
+    "checkout": "إتمام الشراء",
+    "remove": "حذف",
+    "quantity": "الكمية",
+    "add_success": "تمت الإضافة للسلة",
+    "remove_success": "تم الحذف من السلة"
+  },
+
+  "wishlist": {
+    "title": "المفضلة",
+    "empty": "قائمة المفضلة فارغة",
+    "add_success": "تمت الإضافة للمفضلة",
+    "remove_success": "تم الحذف من المفضلة"
+  },
+
+  "details": {
+    "add_to_cart": "أضف للسلة",
+    "add_to_wishlist": "أضف للمفضلة",
+    "description": "الوصف",
+    "price": "السعر",
+    "discount": "الخصم"
+  },
+
+  "profile": {
+    "title": "الملف الشخصي",
+    "edit": "تعديل الملف",
+    "my_orders": "طلباتي",
+    "reset_password": "تغيير كلمة المرور",
+    "current_password": "كلمة المرور الحالية",
+    "new_password": "كلمة المرور الجديدة",
+    "phone": "رقم الهاتف",
+    "address": "العنوان",
+    "update_success": "تم تحديث الملف الشخصي بنجاح"
+  },
+
+  "order": {
+    "place_order": "إتمام الطلب",
+    "order_success": "تم تقديم الطلب بنجاح",
+    "governorate": "المحافظة",
+    "select_governorate": "اختر المحافظة",
+    "order_history": "سجل الطلبات",
+    "no_orders": "لا توجد طلبات حتى الآن"
+  },
+
+  "settings": {
+    "title": "الإعدادات",
+    "faqs": "الأسئلة الشائعة",
+    "contact_us": "تواصل معنا",
+    "terms": "الشروط والأحكام",
+    "send": "إرسال",
+    "subject": "الموضوع",
+    "message": "الرسالة",
+    "contact_success": "تم إرسال الرسالة بنجاح"
+  },
+
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "invalid_email": "البريد الإلكتروني غير صحيح",
+    "short_password": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+    "passwords_not_match": "كلمات المرور غير متطابقة"
+  }
+}

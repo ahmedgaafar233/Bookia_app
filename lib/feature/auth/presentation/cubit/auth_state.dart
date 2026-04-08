@@ -7,8 +7,8 @@ class AuthInitial extends AuthState {}
 class AuthLoading extends AuthState {}
 
 class AuthSuccess extends AuthState {
-  final LoginResponseModel loginResponseModel;
-  AuthSuccess(this.loginResponseModel);
+  final AuthEntity authEntity;
+  AuthSuccess(this.authEntity);
 }
 
 class AuthError extends AuthState {

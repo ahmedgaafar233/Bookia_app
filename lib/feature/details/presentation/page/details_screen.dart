@@ -1,13 +1,14 @@
-import 'package:bookia/core/network/dio_consumer.dart';
+import 'package:bookia/core/di/service_locator.dart';
+
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/utils/app_colors.dart';
-import 'package:bookia/feature/cart/data/repos/cart_repo.dart';
+
 import 'package:bookia/feature/details/presentation/widgets/cart_action/cart_icon.dart';
 import 'package:bookia/feature/details/presentation/widgets/cart_action/cubit/cart_action_cubit.dart';
 import 'package:bookia/feature/details/presentation/widgets/wishlist_action/cubit/wishlist_action_cubit.dart';
 import 'package:bookia/feature/details/presentation/widgets/wishlist_action/wishlist_icon.dart';
 import 'package:bookia/feature/home/data/models/product_response_model.dart';
-import 'package:bookia/feature/wishlist/data/repos/wishlist_repo.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,10 +26,10 @@ class DetailsScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => CartActionCubit(CartRepository(DioConsumer())),
+          create: (context) => sl<CartActionCubit>(),
         ),
         BlocProvider(
-          create: (context) => WishlistActionCubit(WishlistRepository(DioConsumer())),
+          create: (context) => sl<WishlistActionCubit>(),
         ),
       ],
       child: Scaffold(

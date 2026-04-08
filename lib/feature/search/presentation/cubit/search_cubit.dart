@@ -1,9 +1,9 @@
-import 'package:bookia/feature/search/data/repos/search_repo.dart';
+import 'package:bookia/feature/search/domain/repos/base_search_repo.dart';
 import 'package:bookia/feature/search/presentation/cubit/search_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchCubit extends Cubit<SearchState> {
-  final SearchRepository _searchRepository;
+  final BaseSearchRepo _searchRepository;
 
   SearchCubit(this._searchRepository) : super(SearchInitial());
 

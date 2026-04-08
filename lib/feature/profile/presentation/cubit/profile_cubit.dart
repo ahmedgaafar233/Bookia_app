@@ -1,10 +1,10 @@
-import 'package:bookia/feature/profile/data/repos/profile_repo.dart';
+import 'package:bookia/feature/profile/domain/repos/base_profile_repo.dart';
 import 'package:bookia/feature/profile/presentation/cubit/profile_state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  final ProfileRepository _profileRepository;
+  final BaseProfileRepo _profileRepository;
 
   ProfileCubit(this._profileRepository) : super(ProfileInitial());
 

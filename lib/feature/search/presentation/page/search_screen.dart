@@ -1,10 +1,11 @@
+import 'package:bookia/core/di/service_locator.dart';
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/functions/navigation.dart';
-import 'package:bookia/core/network/dio_consumer.dart';
+
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_text_field.dart';
 import 'package:bookia/feature/home/presentation/widgets/book_card.dart';
-import 'package:bookia/feature/search/data/repos/search_repo.dart';
+
 import 'package:bookia/feature/search/presentation/cubit/search_cubit.dart';
 import 'package:bookia/feature/search/presentation/cubit/search_state.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SearchCubit(SearchRepository(DioConsumer())),
+      create: (context) => sl<SearchCubit>(),
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(

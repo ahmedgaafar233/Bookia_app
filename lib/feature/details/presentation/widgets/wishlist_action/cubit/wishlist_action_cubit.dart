@@ -1,11 +1,11 @@
-import 'package:bookia/feature/wishlist/data/repos/wishlist_repo.dart';
+import 'package:bookia/feature/wishlist/domain/repos/base_wishlist_repo.dart';
 import 'package:bookia/core/services/local/shared_prefs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'wishlist_action_state.dart';
 
 class WishlistActionCubit extends Cubit<WishlistActionState> {
-  final WishlistRepository repository;
+  final BaseWishlistRepo repository;
   WishlistActionCubit(this.repository) : super(WishlistActionInitial());
 
   bool isProductInWishlist(int productId) {

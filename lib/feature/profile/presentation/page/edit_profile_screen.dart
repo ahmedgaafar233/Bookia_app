@@ -1,11 +1,12 @@
+import 'package:bookia/core/di/service_locator.dart';
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/functions/navigation.dart';
-import 'package:bookia/core/network/dio_consumer.dart';
+
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/widgets/custom_button.dart';
 import 'package:bookia/core/widgets/custom_text_field.dart';
 import 'package:bookia/core/utils/app_colors.dart';
-import 'package:bookia/feature/profile/data/repos/profile_repo.dart';
+
 import 'package:bookia/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:bookia/feature/profile/presentation/cubit/profile_state.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProfileCubit(ProfileRepository(DioConsumer()))..getProfile(),
+      create: (context) => sl<ProfileCubit>()..getProfile(),
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(

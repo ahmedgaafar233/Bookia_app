@@ -1,9 +1,10 @@
-import 'package:bookia/core/network/dio_consumer.dart';
+import 'package:bookia/core/di/service_locator.dart';
+
 import 'package:bookia/core/routes/app_routes.dart';
 import 'package:bookia/core/utils/app_colors.dart';
 import 'package:bookia/core/widgets/custom_button.dart';
 import 'package:bookia/core/widgets/custom_text_field.dart';
-import 'package:bookia/feature/auth/data/repos/auth_repository.dart';
+
 import 'package:bookia/feature/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(AuthRepository(DioConsumer())),
+      create: (context) => sl<AuthCubit>(),
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {

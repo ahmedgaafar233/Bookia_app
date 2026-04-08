@@ -1,11 +1,11 @@
 import 'package:bookia/feature/place_order/data/models/governorate.dart';
-import 'package:bookia/feature/place_order/data/repository/place_order_repo.dart';
+import 'package:bookia/feature/place_order/domain/repos/base_place_order_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'place_order_state.dart';
 
 class PlaceOrderCubit extends Cubit<PlaceOrderState> {
-  final PlaceOrderRepository repository;
+  final BasePlaceOrderRepo repository;
   PlaceOrderCubit(this.repository) : super(PlaceOrderInitial());
 
   List<GovernorateData> governorates = [];

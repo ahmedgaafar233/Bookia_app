@@ -1,9 +1,9 @@
-import 'package:bookia/feature/settings/data/repos/settings_repo.dart';
+import 'package:bookia/feature/settings/domain/repos/base_settings_repo.dart';
 import 'package:bookia/feature/settings/presentation/cubit/settings_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
-  final SettingsRepository settingsRepository;
+  final BaseSettingsRepo settingsRepository;
 
   SettingsCubit(this.settingsRepository) : super(SettingsInitial());
 
@@ -36,7 +36,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   }) async {
     emit(SettingsLoading());
     try {
-      final response = await settingsRepository.contactUs(
+      await settingsRepository.contactUs(
         name: name,
         email: email,
         phone: phone,

@@ -1,12 +1,12 @@
 import 'package:bookia/core/services/local/shared_prefs.dart';
 import 'package:bookia/feature/home/data/models/product_response_model.dart';
-import 'package:bookia/feature/wishlist/data/repos/wishlist_repo.dart';
+import 'package:bookia/feature/wishlist/domain/repos/base_wishlist_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'wishlist_state.dart';
 
 class WishlistCubit extends Cubit<WishlistState> {
-  final WishlistRepository wishlistRepository;
+  final BaseWishlistRepo wishlistRepository;
   WishlistCubit(this.wishlistRepository) : super(WishlistInitial());
 
   ProductResponseModel? wishlistModel;

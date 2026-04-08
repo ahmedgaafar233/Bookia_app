@@ -1,17 +1,23 @@
-import 'package:bookia/core/network/api_constants.dart';
-import 'package:bookia/core/network/dio_consumer.dart';
+import 'package:bookia/core/errors/exceptions.dart';
+import 'package:bookia/feature/place_order/data/datasources/place_order_remote_data_source.dart';
 import 'package:bookia/feature/place_order/data/models/governorates_response.dart';
+import 'package:bookia/feature/place_order/domain/repos/base_place_order_repo.dart';
 
-class PlaceOrderRepository {
-  final DioConsumer dioConsumer;
+class PlaceOrderRepository implements BasePlaceOrderRepo {
+  final BasePlaceOrderRemoteDataSource remoteDataSource;
 
-  PlaceOrderRepository(this.dioConsumer);
+  const PlaceOrderRepository(this.remoteDataSource);
 
+  @override
   Future<GovernoratesResponse> getGovernorates() async {
-    final response = await dioConsumer.get(ApiConstants.governorates);
-    return GovernoratesResponse.fromJson(response.data);
+    try {
+      return await remoteDataSource.getGovernorates();
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 
+  @override
   Future<bool> placeOrder({
     required String name,
     required String email,
@@ -19,18 +25,16 @@ class PlaceOrderRepository {
     required String phone,
     required int governorateId,
   }) async {
-    final response = await dioConsumer.post(
-      ApiConstants.placeOrder,
-      data: {
-        'name': name,
-        'email': email,
-        'address': address,
-        'phone': phone,
-        'governorate_id': governorateId,
-      },
-    );
-    return response.statusCode != null &&
-        response.statusCode! >= 200 &&
-        response.statusCode! < 300;
+    try {
+      return await remoteDataSource.placeOrder(
+        name: name,
+        email: email,
+        address: address,
+        phone: phone,
+        governorateId: governorateId,
+      );
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 }

@@ -1,7 +1,8 @@
+import 'package:bookia/core/di/service_locator.dart';
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/routes/app_routes.dart';
-import 'package:bookia/core/network/dio_consumer.dart';
-import 'package:bookia/feature/home/data/repos/home_repo.dart';
+
+
 import 'package:bookia/feature/home/presentation/cubit/home_cubit.dart';
 import 'package:bookia/feature/home/presentation/widgets/best_seller_books.dart';
 import 'package:bookia/feature/home/presentation/widgets/home_banner.dart';
@@ -18,7 +19,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit(HomeRepository(DioConsumer()))
+      create: (context) => sl<HomeCubit>()
         ..getSliders()
         ..getBestSeller(),
       child: Scaffold(

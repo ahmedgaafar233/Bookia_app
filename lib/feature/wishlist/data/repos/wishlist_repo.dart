@@ -1,34 +1,37 @@
-import 'package:bookia/core/network/api_constants.dart';
-import 'package:bookia/core/network/dio_consumer.dart';
+import 'package:bookia/core/errors/exceptions.dart';
 import 'package:bookia/feature/home/data/models/product_response_model.dart';
+import 'package:bookia/feature/wishlist/data/datasources/wishlist_remote_data_source.dart';
+import 'package:bookia/feature/wishlist/domain/repos/base_wishlist_repo.dart';
 
-class WishlistRepository {
-  final DioConsumer dioConsumer;
+class WishlistRepository implements BaseWishlistRepo {
+  final BaseWishlistRemoteDataSource remoteDataSource;
 
-  WishlistRepository(this.dioConsumer);
+  const WishlistRepository(this.remoteDataSource);
 
+  @override
   Future<ProductResponseModel> getWishlist() async {
-    final response = await dioConsumer.get(ApiConstants.wishlist);
-    return ProductResponseModel.fromJson(response.data);
+    try {
+      return await remoteDataSource.getWishlist();
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 
+  @override
   Future<bool> addToWishlist({required int productId}) async {
-    final response = await dioConsumer.post(
-      ApiConstants.addToWishlist,
-      data: {'product_id': productId},
-    );
-    return response.statusCode != null &&
-        response.statusCode! >= 200 &&
-        response.statusCode! < 300;
+    try {
+      return await remoteDataSource.addToWishlist(productId: productId);
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 
+  @override
   Future<bool> removeFromWishlist({required int productId}) async {
-    final response = await dioConsumer.post(
-      ApiConstants.removeFromWishlist,
-      data: {'product_id': productId},
-    );
-    return response.statusCode != null &&
-        response.statusCode! >= 200 &&
-        response.statusCode! < 300;
+    try {
+      return await remoteDataSource.removeFromWishlist(productId: productId);
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 }

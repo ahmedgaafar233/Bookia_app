@@ -1,92 +1,101 @@
-import 'package:bookia/core/network/api_constants.dart';
-import 'package:bookia/core/network/dio_consumer.dart';
-import 'package:bookia/feature/auth/data/models/login_response_model.dart';
+import 'package:bookia/core/errors/exceptions.dart';
+import 'package:bookia/feature/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:bookia/feature/auth/domain/entities/auth_entity.dart';
+import 'package:bookia/feature/auth/domain/repos/base_auth_repo.dart';
 
-class AuthRepository {
-  final DioConsumer dioConsumer;
+class AuthRepository implements BaseAuthRepo {
+  final BaseAuthRemoteDataSource remoteDataSource;
 
-  AuthRepository(this.dioConsumer);
+  const AuthRepository(this.remoteDataSource);
 
-  Future<LoginResponseModel> login({
+  @override
+  Future<AuthEntity> login({
     required String email,
     required String password,
   }) async {
-    final response = await dioConsumer.post(
-      ApiConstants.login,
-      data: {
-        'email': email,
-        'password': password,
-      },
-    );
-    return LoginResponseModel.fromJson(response.data);
+    try {
+      final model = await remoteDataSource.login(email: email, password: password);
+      return AuthEntity(
+        token: model.data?.token,
+        message: model.message,
+        status: model.status,
+      );
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 
-  Future<LoginResponseModel> register({
+  @override
+  Future<AuthEntity> register({
     required String name,
     required String email,
     required String password,
     required String passwordConfirmation,
   }) async {
-    final response = await dioConsumer.post(
-      ApiConstants.register,
-      data: {
-        'name': name,
-        'email': email,
-        'password': password,
-        'password_confirmation': passwordConfirmation,
-      },
-    );
-    return LoginResponseModel.fromJson(response.data);
+    try {
+      final model = await remoteDataSource.register(
+        name: name,
+        email: email,
+        password: password,
+        passwordConfirmation: passwordConfirmation,
+      );
+      return AuthEntity(
+        token: model.data?.token,
+        message: model.message,
+        status: model.status,
+      );
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 
+  @override
   Future<bool> forgetPassword({required String email}) async {
-    final response = await dioConsumer.post(
-      ApiConstants.forgetPassword,
-      data: {'email': email},
-    );
-    return response.statusCode != null &&
-        response.statusCode! >= 200 &&
-        response.statusCode! < 300;
+    try {
+      return await remoteDataSource.forgetPassword(email: email);
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 
+  @override
   Future<bool> checkForgetPasswordCode({
     required String email,
     required String verifyCode,
   }) async {
-    final response = await dioConsumer.post(
-      ApiConstants.checkForgetPasswordCode,
-      data: {
-        'email': email,
-        'verify_code': verifyCode,
-      },
-    );
-    return response.statusCode != null &&
-        response.statusCode! >= 200 &&
-        response.statusCode! < 300;
+    try {
+      return await remoteDataSource.checkForgetPasswordCode(
+        email: email,
+        verifyCode: verifyCode,
+      );
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 
+  @override
   Future<bool> resetPassword({
     required String verifyCode,
     required String newPassword,
     required String newPasswordConfirmation,
   }) async {
-    final response = await dioConsumer.post(
-      ApiConstants.resetPassword,
-      data: {
-        'verify_code': verifyCode,
-        'new_password': newPassword,
-        'new_password_confirmation': newPasswordConfirmation,
-      },
-    );
-    return response.statusCode != null &&
-        response.statusCode! >= 200 &&
-        response.statusCode! < 300;
+    try {
+      return await remoteDataSource.resetPassword(
+        verifyCode: verifyCode,
+        newPassword: newPassword,
+        newPasswordConfirmation: newPasswordConfirmation,
+      );
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 
+  @override
   Future<bool> logout() async {
-    final response = await dioConsumer.post(ApiConstants.logout);
-    return response.statusCode != null &&
-        response.statusCode! >= 200 &&
-        response.statusCode! < 300;
+    try {
+      return await remoteDataSource.logout();
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 }

@@ -1,21 +1,31 @@
-import 'package:bookia/core/network/api_constants.dart';
-import 'package:bookia/core/network/dio_consumer.dart';
+import 'package:bookia/core/errors/exceptions.dart';
+import 'package:bookia/feature/settings/data/datasources/settings_remote_data_source.dart';
+import 'package:bookia/feature/settings/domain/repos/base_settings_repo.dart';
 
-class SettingsRepository {
-  final DioConsumer dioConsumer;
+class SettingsRepository implements BaseSettingsRepo {
+  final BaseSettingsRemoteDataSource remoteDataSource;
 
-  SettingsRepository(this.dioConsumer);
+  const SettingsRepository(this.remoteDataSource);
 
+  @override
   Future<dynamic> getFaqs() async {
-    final response = await dioConsumer.get(ApiConstants.faqs);
-    return response.data;
+    try {
+      return await remoteDataSource.getFaqs();
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 
+  @override
   Future<dynamic> getSettings() async {
-    final response = await dioConsumer.get(ApiConstants.settings);
-    return response.data;
+    try {
+      return await remoteDataSource.getSettings();
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 
+  @override
   Future<dynamic> contactUs({
     required String name,
     required String email,
@@ -23,16 +33,16 @@ class SettingsRepository {
     required String subject,
     required String message,
   }) async {
-    final response = await dioConsumer.post(
-      ApiConstants.contactUs,
-      data: {
-        'name': name,
-        'email': email,
-        'phone': phone,
-        'subject': subject,
-        'message': message,
-      },
-    );
-    return response.data;
+    try {
+      return await remoteDataSource.contactUs(
+        name: name,
+        email: email,
+        phone: phone,
+        subject: subject,
+        message: message,
+      );
+    } on ServerException catch (e) {
+      throw ServerException(message: e.message, statusCode: e.statusCode);
+    }
   }
 }

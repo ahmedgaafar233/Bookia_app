@@ -1,38 +1,28 @@
-import 'package:bookia/feature/auth/data/models/login_response_model.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bookia/feature/auth/data/repos/auth_repository.dart';
-
+import 'package:bookia/feature/auth/domain/entities/auth_entity.dart';
+import 'package:bookia/feature/auth/domain/repos/base_auth_repo.dart';
 import 'package:bookia/core/services/local/shared_prefs.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  final AuthRepository authRepository;
+  final BaseAuthRepo authRepository;
   AuthCubit(this.authRepository) : super(AuthInitial());
 
   Future<void> login({required String email, required String password}) async {
     emit(AuthLoading());
     try {
-      final response = await authRepository.login(email: email, password: password);
-      if (response.status != null && response.status! >= 200 && response.status! < 300) {
-        if (response.data?.token != null) {
-          await SharedPrefs.cacheData(SharedPrefs.kToken, response.data!.token);
+      final entity = await authRepository.login(email: email, password: password);
+      if (entity.status != null &&
+          entity.status! >= 200 &&
+          entity.status! < 300) {
+        if (entity.token != null) {
+          await SharedPrefs.cacheData(SharedPrefs.kToken, entity.token);
         }
-        emit(AuthSuccess(response));
+        emit(AuthSuccess(entity));
       } else {
-        emit(AuthError(response.message ?? 'Login Failed'));
+        emit(AuthError(entity.message ?? 'Login Failed'));
       }
-    } on DioException catch (e) {
-      String message = e.response?.data['message'] ?? 'Login Failed';
-      if (e.response?.data['errors'] != null) {
-        final errors = e.response?.data['errors'] as Map<String, dynamic>;
-        message = errors.values.map((v) {
-          if (v is List) return v.join('\n');
-          return v.toString();
-        }).join('\n');
-      }
-      emit(AuthError(message));
     } catch (e) {
       emit(AuthError(e.toString()));
     }
@@ -46,27 +36,19 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthLoading());
     try {
-      final response = await authRepository.register(
+      final entity = await authRepository.register(
         name: name,
         email: email,
         password: password,
         passwordConfirmation: passwordConfirmation,
       );
-      if (response.status != null && response.status! >= 200 && response.status! < 300) {
-        emit(AuthSuccess(response));
+      if (entity.status != null &&
+          entity.status! >= 200 &&
+          entity.status! < 300) {
+        emit(AuthSuccess(entity));
       } else {
-        emit(AuthError(response.message ?? 'Registration Failed'));
+        emit(AuthError(entity.message ?? 'Registration Failed'));
       }
-    } on DioException catch (e) {
-      String message = e.response?.data['message'] ?? 'Registration Failed';
-      if (e.response?.data['errors'] != null) {
-        final errors = e.response?.data['errors'] as Map<String, dynamic>;
-        message = errors.values.map((v) {
-          if (v is List) return v.join('\n');
-          return v.toString();
-        }).join('\n');
-      }
-      emit(AuthError(message));
     } catch (e) {
       emit(AuthError(e.toString()));
     }
@@ -77,7 +59,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final success = await authRepository.forgetPassword(email: email);
       if (success) {
-        emit(AuthSuccess(LoginResponseModel(message: 'Code sent', status: 200)));
+        emit(AuthSuccess(const AuthEntity(message: 'Code sent', status: 200)));
       } else {
         emit(AuthError('Failed to send code'));
       }
@@ -89,9 +71,12 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> checkCode(String email, String code) async {
     emit(AuthLoading());
     try {
-      final success = await authRepository.checkForgetPasswordCode(email: email, verifyCode: code);
+      final success = await authRepository.checkForgetPasswordCode(
+        email: email,
+        verifyCode: code,
+      );
       if (success) {
-        emit(AuthSuccess(LoginResponseModel(message: 'Code valid', status: 200)));
+        emit(AuthSuccess(const AuthEntity(message: 'Code valid', status: 200)));
       } else {
         emit(AuthError('Invalid code'));
       }
@@ -113,7 +98,7 @@ class AuthCubit extends Cubit<AuthState> {
         newPasswordConfirmation: confirmPassword,
       );
       if (success) {
-        emit(AuthSuccess(LoginResponseModel(message: 'Password reset', status: 200)));
+        emit(AuthSuccess(const AuthEntity(message: 'Password reset', status: 200)));
       } else {
         emit(AuthError('Reset failed'));
       }
@@ -128,7 +113,7 @@ class AuthCubit extends Cubit<AuthState> {
       final success = await authRepository.logout();
       if (success) {
         await SharedPrefs.removeData(SharedPrefs.kToken);
-        emit(AuthSuccess(LoginResponseModel(message: 'Logout successful', status: 200)));
+        emit(AuthSuccess(const AuthEntity(message: 'Logout successful', status: 200)));
       } else {
         emit(AuthError('Logout failed'));
       }

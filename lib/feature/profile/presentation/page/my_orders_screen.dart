@@ -1,9 +1,10 @@
+import 'package:bookia/core/di/service_locator.dart';
 import 'package:bookia/core/constants/app_assets.dart';
 import 'package:bookia/core/functions/navigation.dart';
-import 'package:bookia/core/network/dio_consumer.dart';
+
 import 'package:bookia/core/styles/text_styles.dart';
 import 'package:bookia/core/utils/app_colors.dart';
-import 'package:bookia/feature/profile/data/repos/profile_repo.dart';
+
 import 'package:bookia/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:bookia/feature/profile/presentation/cubit/profile_state.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class MyOrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProfileCubit(ProfileRepository(DioConsumer()))..getOrderHistory(),
+      create: (context) => sl<ProfileCubit>()..getOrderHistory(),
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(

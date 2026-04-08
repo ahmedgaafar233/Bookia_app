@@ -1,12 +1,12 @@
 import 'package:bookia/feature/home/data/models/product_response_model.dart';
 import 'package:bookia/feature/home/data/models/slider_response_model.dart';
-import 'package:bookia/feature/home/data/repos/home_repo.dart';
+import 'package:bookia/feature/home/domain/repos/base_home_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  final HomeRepository homeRepository;
+  final BaseHomeRepo homeRepository;
   HomeCubit(this.homeRepository) : super(HomeInitial());
 
   SliderResponseModel? sliderResponseModel;
