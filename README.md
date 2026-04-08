@@ -13,6 +13,9 @@ Welcome to **Bookia**, a fully-featured, beautifully designed cross-platform boo
 - **Global State Management:** Real-time synchronized cart and wishlist state via `Cubit`.
 - **Cached Sessions:** Secure token handling with dynamic Splash routing.
 - **Production Ready:** Optimized Release build with adaptive launcher icons.
+- **Clean Architecture:** Refactored Domain/Data/Presentation layers for scalability.
+- **Dependency Injection:** Centralized service locator with `GetIt`.
+- **Localization:** Full support for Arabic and English using `easy_localization`.
 
 ## 📸 Screenshots (Full Flow)
 
@@ -36,9 +39,9 @@ Welcome to **Bookia**, a fully-featured, beautifully designed cross-platform boo
 </p>
 
 ## 🚀 Download & Run
-You can download the production-ready Release APK directly from this repository.
+You can download the production-ready Release APK directly from this repository:
 
-**📥 [Download Release APK](docs/apk/bookia-release.apk)**
+**📥 [Download Release APK (v1.1)](https://github.com/ahmedgaafar233/Bookia_app/raw/main/docs/apk/bookia-release.apk)**
 
 ---
 
